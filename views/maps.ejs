@@ -1,0 +1,84 @@
+<html>
+    <head>
+        <title>Locat Map</title>
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    
+        <!-- <link rel="stylesheet" type="text/css" href="./style.css" /> -->
+
+        <!-- page specific scripts -->
+        <% if (typeof libs !== 'undefined') { %>
+            <% for (let lib of libs) { %>
+                <script src='/js/<%= lib %>.js' type='text/javascript' defer></script>
+            <% } %>
+        <% } %>
+
+        <!-- styles specific to individual pages -->
+        <% if (typeof styles !== 'undefined') { %>
+            <% if (styles.length > 0) { %>
+                <% for (let style of styles) { %>
+                    <link rel="stylesheet" href="/css/<%= style %>.css">
+                <% } %>
+            <% } %>
+        <% } %>
+
+        <!-- the google maps script -->
+        <script
+            src="http://maps.googleapis.com/maps/api/js?<%= gapiOptions %>"
+            defer
+        ></script>
+
+        <!-- idk if i am doing this right but here i am declaring the fuction for the map -->
+        <!-- there red sqiugglies but i think thats cause vscode doesnt like html + ejs -->
+        <script>
+            // Initialize and add the map
+            function initMap() {
+                // The location of Davis
+                const davis = { lat: 38.5449, lng: -121.7405 };
+                // The map, centered at davis
+                const map = new google.maps.Map(document.getElementById("map"), {
+                    zoom: <%= zoomLevel %>,
+                    center: davis,
+                });
+
+                <% console.log(catMarkers) %>
+                <% for (let catMarker of catMarkers) { %>
+                    console.log(<%= catMarker.lat%>);
+
+                    const contentString_<%=catMarker.name%> = '<div id="content">' +
+                        '<div id="siteNotice">' +
+                        "</div>" +
+                        '<h1 id="firstHeading" class="firstHeading"><%=catMarker.name%></h1>' +
+                        '<div id="bodyContent">' +
+                        "<p><%=catMarker.name%> is a cat. They are really cute.</p>" +
+                        "</div>" +
+                        "</div>";
+
+                    const infowindow_<%=catMarker.name%> = new google.maps.InfoWindow({
+                        content: contentString_<%=catMarker.name%>,
+                    });
+                    // The marker, positioned at Uluru
+                    const marker_<%=catMarker.name%>  = new google.maps.Marker({
+                        position: { lat: <%= catMarker.lat%>, lng: <%= catMarker.lng %> },
+                        map: map,
+                        // icon: "https://art.pixilart.com/42e019c236fe77a.png",
+                    });
+                    marker_<%=catMarker.name%>.addListener("click", () => {
+                        infowindow_<%=catMarker.name%>.open({
+                        anchor: marker_<%=catMarker.name%>,
+                        map,
+                        shouldFocus: false,
+                        });
+                    });
+                <% } %>
+            }
+            
+            window.initMap = initMap;
+        </script>
+
+    </head>
+    <body>
+        <h1>Locat Map! Find a cat or something idk im not a cat person</h1>
+        <!--The div element for the map -->
+        <div id="map"></div>
+    </body>
+</html>
