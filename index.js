@@ -1,8 +1,8 @@
 //uwu
 
-const express = require('express');
-const ejs = require('ejs');
-const path = require('path')
+import express from "express";
+import ejs from 'ejs';
+import path from "path";
 
 const app = express();
 const port = process.env.PORT || 8080;
@@ -41,6 +41,10 @@ app.get("/map", function(req, res){
 
     mapData.exampleVar = 'testing joe mama';
     res.render("maps.ejs", mapData);
+});
+
+app.get("/cat/new",  (req, res) => {
+    res.render("newcat.ejs")
 });
 
 app.listen(port);
