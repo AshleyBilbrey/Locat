@@ -2,15 +2,21 @@
   "name": "locat",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
+    "dev": "export GOOGLE_APPLICATION_CREDENTIALS='./test_creds.json'; nodemon app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
+  "type": "module",
   "license": "UNLICENSED",
   "dependencies": {
+    "@google-cloud/vision": "^2.4.2",
     "dotenv": "^16.0.0",
     "express": "^4.17.3",
     "mongodb": "^4.5.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
   }
 }
