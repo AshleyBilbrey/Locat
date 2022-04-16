@@ -1,0 +1,27 @@
+body {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+h1 {
+    font-size: 64px;
+}
+
+.cat-header {
+    display: flex;
+    align-items: center;
+}
+
+.cat-thumb {
+    width: 64px;
+}
+
+/* Set the size of the div element that contains the map */
+#map {
+    width: 100%;
+    /* The width is the width of the web page */
+
+    /* this will make the map take up the rest of the page */
+    flex-grow: 1;
+}
