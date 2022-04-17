@@ -13,9 +13,12 @@
   Locat is a webapp that can be used to locate cats and know more about them. One can add information about a cat including their location. 🐈
 </div>
 
-<b>*****Add some screenshots</b><br>
+<b>Try it now!</b>
+https://locat.tech/
 
-<b>*****Add a demo</b><br>
+<br>
+![Screenshot 2022-04-17 at 10-13-37 Locat Map](https://user-images.githubusercontent.com/44065883/163725897-731ec11c-90f2-4e6f-a4e6-c114850061d4.png)
+![Screenshot 2022-04-17 at 10-29-07 Cheeto](https://user-images.githubusercontent.com/44065883/163725923-4da4c46d-a5f7-41b6-9478-69b6f49c528f.png)
 
 <h2>Automagic of Locat</h2>     
 ⭐️ Want to pet a cat? Check out the cat map!🗺<br>  
@@ -26,7 +29,7 @@
 <h2>Paw-sible Users</h2>
 👤 Cheeto lovers <br>
 👤 Campus explorers <br>
-👤 Spay Neuter Clinics?? <br>
+👤 Spay Neuter Clinics <br>
 👤 Cat paw-parazzi <br>
 
 <h2>Meow It Works</h2>
