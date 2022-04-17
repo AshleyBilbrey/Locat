@@ -26,8 +26,8 @@
                 <input type="checkbox" id="fixed" name="fixed" value="fixed">
                 <label class="light" for="fixed">Fixed</label><br/>
                 
-                <input type="checkbox" id="healthy" name="healthy" value="healthy">
-                <label class="light" for="healthy" value="selected" checked>Healthy</label>
+                <input type="checkbox" id="healthy" name="healthy" value="healthy" <%= healthy ? 'checked' : null %>>
+                <label class="light" for="healthy">Healthy</label>
 
                 <label for="remarks">Remarks</label>
                 <input type="text" id="remarks" name="remarks" placeholder="This cat is very cute!">
