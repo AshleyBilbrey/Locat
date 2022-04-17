@@ -13,6 +13,7 @@ import constructMap from "./helpers/setUpMap.js";
 import updateLoc from "./helpers/updateLoc.js";
 import updateCheckInLoc from "./helpers/updateCheckInLoc.js";
 import newCheckIn from "./helpers/newCheckIn.js";
+import searchCatsByName from "./helpers/searchCatsByName.js";
 import allCheckIns from "./helpers/allCheckIns.js";
 
 const app = express();
@@ -21,16 +22,18 @@ const port = process.env.PORT || 8080;
 // Define static assets
 app.use(express.static('static'));
 
+const testCats = [
+    { _id: "jjfjdjeeee", name: "Cheeto", lat: 38.5449, lng: -121.7405, remarks: "chonk", canpet: true, canfeed: false, healthy: false },
+    { _id: "jee333nendje", name: "Joe the Cat", lat: 38.5469, lng: -121.7465, remarks: "boknk", canfeed: true },
+    { _id: "udjj3j3jjj", name: "boebinga", lat: 38.5369, lng: -121.7565, remarks: "badonkadong", healthy: true },
+]
+
 // this is where the map itself will be served
 app.get("/map", function(req, res){
     // all data that needs to go to the map page will be stored in this mapdata object
     const mapData = constructMap();
 
-    mapData.catMarkers = [
-        { _id: "jjfjdjeeee", name: "Cheeto", lat: 38.5449, lng: -121.7405, remarks: "chonk", canpet: true, canfeed: false, healthy: false },
-        { _id: "jee333nendje", name: "Joe the Cat", lat: 38.5469, lng: -121.7465, remarks: "boknk", canfeed: true },
-        { _id: "udjj3j3jjj", name: "boebinga", lat: 38.5369, lng: -121.7565, remarks: "badonkadong", healthy: true },
-    ]
+    mapData.catMarkers = testCats;
 
     function showcats(results) {
         const tempList = [];
@@ -131,13 +134,13 @@ app.get("/checkimg/:id", (req, res) => {
 })
 
 app.get("/cat/:id", (req, res) => {
-
     findCat(req.params.id, (catributes) => {
         allCheckIns(req.params.id, (allCheckIns) => {
+            const mapData = constructMap();
             console.log("Found check ins for kitty:")
             console.log(allCheckIns)
             catributes.checkIns = allCheckIns;
-            res.render("viewcat.ejs", catributes)
+            res.render("viewcat.ejs", Object.assign(catributes, mapData))
         })
         
     })
@@ -145,17 +148,29 @@ app.get("/cat/:id", (req, res) => {
 })
 
 app.get("/cat", (req, res) => {
-    const testCats = [
-        { _id: "jjfjdjeeee", name: "Cheeto", lat: 38.5449, lng: -121.7405, remarks: "chonk", canpet: true, canfeed: false, healthy: false },
-        { _id: "jee333nendje", name: "Joe the Cat", lat: 38.5469, lng: -121.7465, remarks: "boknk", canfeed: true },
-        { _id: "udjj3j3jjj", name: "boebinga", lat: 38.5369, lng: -121.7565, remarks: "badonkadong", healthy: true },
-    ]
-
     allCats(cats => {
         res.render("list.ejs", {cats: cats, styles: ['list']});
     });
 
     // res.render("list.ejs", {cats: testCats, styles: ['list']});
+})
+
+app.post("/cat", (req, res) => {
+    const form = new formidable.IncomingForm();
+
+    form.parse(req, (err, fields, files) => {
+        if (err) {
+            console.log(err)
+            return res.status(500).send("Sorry, there was an error processing your request.")
+        }
+
+        // res.render("list.ejs", {cats: searchCatsByName(testCats, fields.search), styles: ['list']});
+        
+        allCats(cats => {
+            const searchedCats = searchCatsByName(cats, rfields.search);
+            res.render("list.ejs", {cats: cats, styles: ['list']});
+        });
+    })
 })
 
 app.get("/", (req, res) => {
@@ -223,6 +238,7 @@ app.get("/info", function(req, res) {
 });
 
 app.use(express.json());
+// everything below here needs to be here cause of this use thing
 
 // this is where the map itself will be served
 app.get("/map/input/:id", function(req, res){
