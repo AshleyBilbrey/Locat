@@ -12,6 +12,7 @@
   "license": "UNLICENSED",
   "dependencies": {
     "@google-cloud/vision": "^2.4.2",
+    "axios": "^0.26.1",
     "dotenv": "^16.0.0",
     "ejs": "^3.0.2",
     "exifr": "^7.1.3",

@@ -4,6 +4,7 @@ import express from "express";
 import ejs from 'ejs';
 import path from "path";
 import fs from "fs";
+import axios from 'axios';
 import formidable from "formidable";
 import exifr from "exifr"
 import newCat from "./helpers/newCat.js"
@@ -171,6 +172,8 @@ app.post("/cat", (req, res) => {
             return res.status(500).send("Sorry, there was an error processing your request.")
         }
 
+        let searchTerm = fields.search;
+
         if(files.picture != null) {
             const imageData = {};
 
@@ -183,13 +186,21 @@ app.post("/cat", (req, res) => {
                 })
             }
 
-            // SEND DATA TO KARIM THING HERE
+            fs.readFile("files.picture.filepath", (err, file) => {
+                if(file) {
+                    axios.post("url", { query: {image: file, info: imageData}}).then(res => {
+                        searchTerm = res.body;
+                    });
+                } else {
+                    return res.status(500).send("Sorry, there was an error processing your request.")
+                }
+            });
         }
 
         // res.render("list.ejs", {cats: searchCatsByName(testCats, fields.search), styles: ['list']});
         
         allCats(cats => {
-            const searchedCats = searchCatsByName(cats, rfields.search);
+            const searchedCats = searchCatsByName(cats, searchTerm);
             res.render("list.ejs", {cats: cats, styles: ['list']});
         });
     })
