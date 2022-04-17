@@ -1,0 +1,125 @@
+{
+    "dataset": "cats-2",
+    "cats": [
+        {
+            "catname": "Cheeto",
+            "filename": "Cheeto-1",
+            "lat": 38.5369722669077,
+            "lng": -121.75092535602036
+        },
+        {
+            "catname": "Cheeto",
+            "filename": "Cheeto-2",
+            "lat": 38.53664374884196,
+            "lng": -121.75185105182152
+        },
+        {
+            "catname": "Cheeto",
+            "filename": "Cheeto-3",
+            "lat": 38.53750166041921,
+            "lng": -121.75101631704361
+        },
+        {
+            "catname": "Cheeto",
+            "filename": "Cheeto-4",
+            "lat": 38.53657176811121,
+            "lng": -121.75083584584407
+        },
+        {
+            "catname": "Cheeto",
+            "filename": "Cheeto-5",
+            "lat": 38.53596224253825,
+            "lng": -121.75025159056865
+        },
+        {
+            "catname": "Cheeto",
+            "filename": "Cheeto-6",
+            "lat": 38.53602172946577,
+            "lng": -121.75190193760956
+        },
+        {
+            "catname": "Cheeto",
+            "filename": "Cheeto-7",
+            "lat": 38.536895714634944,
+            "lng": -121.75075264967583
+        },
+        {
+            "catname": "Cheeto",
+            "filename": "Cheeto-8",
+            "lat": 38.53742179875191,
+            "lng": -121.75150412026153
+        },
+        {
+            "catname": "Cheeto",
+            "filename": "Cheeto-9",
+            "lat": 38.53689277560915,
+            "lng": -121.75123359085157
+        },
+        {
+            "catname": "Coco",
+            "filename": "Coco-1",
+            "lat": 38.542805360499855,
+            "lng": -121.75269934502568
+        },
+        {
+            "catname": "Coco",
+            "filename": "Coco-2",
+            "lat": 38.54342011856714,
+            "lng": -121.75066248075628
+        },
+        {
+            "catname": "Coco",
+            "filename": "Coco-3",
+            "lat": 38.53774275183786,
+            "lng": -121.75128838089351
+        },
+        {
+            "catname": "Compost",
+            "filename": "Coco-4",
+            "lat": 38.54135777751849,
+            "lng": -121.75184879130259
+        },
+        {
+            "catname": "Compost",
+            "filename": "Compost-1",
+            "lat": 38.54214778982532,
+            "lng": -121.76539173534016
+        },
+        {
+            "catname": "Compost",
+            "filename": "Compost-2",
+            "lat": 38.540722861728646,
+            "lng": -121.7655055972867
+        },
+        {
+            "catname": "Compost",
+            "filename": "Compost-3",
+            "lat": 38.54000101239656,
+            "lng": -121.76631461639258
+        },
+        {
+            "catname": "Compost",
+            "filename": "Compost-4",
+            "lat": 38.54024944188084,
+            "lng": -121.7622934918102
+        },
+        {
+            "catname": "Compost",
+            "filename": "Compost-5",
+            "lat": 38.54327220460374,
+            "lng": -121.76496201170625
+        },
+        {
+            "catname": "Compost",
+            "filename": "Compost-6",
+            "lat": 38.541521778554575,
+            "lng": -121.76318752266718
+        },
+        {
+            "catname": "Compost",
+            "filename": "Compost-7",
+            "lat": 38.54145963246794,
+            "lng": -121.76668353092325
+        }
+    ]
+}
