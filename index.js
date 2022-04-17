@@ -137,6 +137,7 @@ app.get("/cat/:id", (req, res) => {
     findCat(req.params.id, (catributes) => {
         allCheckIns(req.params.id, (allCheckIns) => {
             const mapData = constructMap();
+            mapData.styles = [];
             console.log("Found check ins for kitty:")
             console.log(allCheckIns)
             catributes.checkIns = allCheckIns;
