@@ -3,6 +3,12 @@
         <title>Add a Cat</title>
     
         <%- include('partials/head') %>
+
+        <script>
+            function fileUploaded(file) {
+                document.getElementById('upload-button').innerHTML = file.files[0].name + " selected!";
+            }
+        </script>
     </head>
     <body>
         <%- include('partials/header') %>
@@ -10,12 +16,12 @@
         <content>
             <h1>Add a Cat</h1>
             <form method="post" enctype="multipart/form-data">
-                <label for="name">Cat Name</label>
+                <label for="name">Cat Name:</label>
                 <input type="text" id="name" name="name" placeholder="Cat name">
 
                 <div id="upload-button-wrapper">
                     <button id="upload-button">Upload Cat Photo</button>
-                    <input type="file" id="file" name="picture" />
+                    <input type="file" id="file" name="picture" onchange="fileUploaded(this)"/>
                 </div><br/>
                                 
                 <input type="checkbox" id="canpet" name="canpet" value="canpet">
@@ -36,15 +42,12 @@
                 <br/>
                 <br/>
 
-                <label for="caretaker">Caretaker Name</label>
+                <label for="caretaker">Caretaker Name:</label>
                 <input type="text" id="caretaker" name="caretaker" placeholder="Cat's caretaker">
 
                 <label for="caretakernumber">Caretaker Phone Number (Kept private, std. rates apply.)</label>
                 <input type="text" id="caretakernumber" name="caretakernumber">
-
-
                 
-
                 <button type="submit">Submit</button>
 
             </form>

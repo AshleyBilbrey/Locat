@@ -121,11 +121,9 @@ app.get("/cat/:id", (req, res) => {
 })
 
 app.get("/cat", (req, res) => {
-
-    allCats((cats) => {
-        res.send(cats);
-    })
-
+    allCats(cats => {
+        res.render("list.ejs", {cats: cats});
+    });
 })
 
 app.get("/", (req, res) => {
