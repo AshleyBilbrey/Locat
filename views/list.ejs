@@ -10,8 +10,22 @@
         <content>
             <h1>All Cats</h1>
             <% for (let cat of cats) { %>
-                <div class="Cat">
-                    <h2><%=cat.name%></h2>
+                <div class="cat-content">
+                    <div class="cat-header">
+                        <img src="/catimage/<%=cat._id%>" class="cat-paw"/>
+                        <div>
+                            <h2 class="cat-title"><a href="/cat/<%=cat._id%>"><%=cat.name%></a></h2>
+                            <% const petText = cat.canpet ? "You can pet this cat!" : "Do not pet this cat!"%>
+                            <% const feedText = cat.canfeed ? "You can feed this cat!" : "Do not feed this cat!"%>
+                            <% const healthyText = cat.healthy ? "This cat is healthy." : "This cat is not healthy :("%>
+                            <div class="cat-icons">
+                                <img src="/images/<%= cat.canpet ? "Pet.png" : "NoPet.png"%>" alt="<%= petText%>" title="<%= petText%>"/>
+                                <img src="/images/<%= cat.canfeed ? "Feed.png" : "NoFeed.png"%>" alt="<%= feedText%>" title="<%= feedText%>"/>
+                                <img src="/images/<%= cat.healthy ? "Healthy.png" : "NoHealthy.png"%>" alt="<%= healthyText%>" title="<%= healthyText%>"/>
+                            </div>
+                        </div>
+                    </div>
+                    <p><%=cat.remarks%></p>
                 </div>
             <% } %>
         </content>
