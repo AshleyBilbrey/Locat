@@ -6,15 +6,12 @@
 
     <body>
         <h1>Add a Cat</h1>
-        <form>
+        <form method="post">
             <label for="name">Cat Name</label><br>
             <input type="text" id="name"><br>
 
-            <label for="latitude">Latitude</label><br>
-            <input type="text" id="latitude" name="latitude"><br>
-
-            <label for="longitude">Longitude</label><br>
-            <input type="text" id="longitude" name="latitude"><br>
+            <label for="picture">Cat Photo</label><br>
+            <input type="file" id="picture" name="picture"><br>
             
             <label for="canpet">Petting Okay</label>
             <input type="checkbox" id="canpet" name="canpet" value="canpet"><br>
@@ -31,7 +28,7 @@
             <label for="caretaker">Caretaker Name</label><br>
             <input type="text" id="caretaker" name="caretaker"><br>
 
-            <label for="remarks">Caretaker Name</label><br>
+            <label for="remarks">Remarks</label><br>
             <input type="text" id="remarks" name="remarks"><br>
 
             <input type="submit" value="Submit">

@@ -3,6 +3,9 @@
 import express from "express";
 import ejs from 'ejs';
 import path from "path";
+import fs from "fs";
+import formidable from "formidable";
+import newCat from "./helpers/newCat.js"
 
 const app = express();
 const port = process.env.PORT || 8080;
@@ -42,6 +45,25 @@ app.get("/map", function(req, res){
     mapData.exampleVar = 'testing joe mama';
     res.render("maps.ejs", mapData);
 });
+
+app.post("/cat/new", (req, res) => {
+    const form = new formidable.IncomingForm();
+
+    form.parse(req, (err, fields, files) => {
+        if (err) {
+            console.log(err)
+            return res.status(500).send("Sorry, there was an error processing your request.")
+        }
+
+        function sendCat(catid) {
+            res.send("Received your new cat! " + catid)
+        }
+
+        const catid = newCat(fields, sendCat)
+        
+        
+    })
+})
 
 app.get("/cat/new",  (req, res) => {
     res.render("newcat.ejs")
