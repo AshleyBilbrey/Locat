@@ -10,31 +10,36 @@
         <content>
             <h1>Add a Cat</h1>
             <form method="post" enctype="multipart/form-data">
-                <label for="name">Cat Name</label><br>
-                <input type="text" id="name" name="name"><br>
+                <label for="name">Cat Name</label>
+                <input type="text" id="name" name="name" placeholder="Cat name">
 
-                <label for="file">Cat Photo</label><br>
-                <input type="file" id="file" name="picture"><br>
+                <div id="upload-button-wrapper">
+                    <button id="upload-button">Upload Cat Photo</button>
+                    <input type="file" id="file" name="picture" />
+                </div><br/>
+                                
+                <input type="checkbox" id="canpet" name="canpet" value="canpet">
+                <label class="light" for="canpet">Petting Okay</label><br/>
                 
-                <label for="canpet">Petting Okay</label>
-                <input type="checkbox" id="canpet" name="canpet" value="canpet"><br>
+                <input type="checkbox" id="canfeed" name="canfeed" value="canfeed">
+                <label class="light" for="canfeed">Feeding Okay</label><br/>
 
-                <label for="canfeed">Feeding Okay</label>
-                <input type="checkbox" id="canfeed" name="canfeed" value="canfeed"><br>
+                <input type="checkbox" id="fixed" name="fixed" value="fixed">
+                <label class="light" for="fixed">Fixed</label><br/>
+                
+                <input type="checkbox" id="healthy" name="healthy" value="healthy">
+                <label class="light" for="healthy">Healthy</label>
+                
+                <br/>
+                <br/>
 
-                <label for="fixed">Fixed</label>
-                <input type="checkbox" id="fixed" name="fixed" value="fixed"><br>
+                <label for="caretaker">Caretaker Name</label>
+                <input type="text" id="caretaker" name="caretaker" placeholder="Cat's caretaker">
 
-                <label for="healthy">Healthy</label>
-                <input type="checkbox" id="healthy" name="healthy" value="healthy"><br>
+                <label for="remarks">Remarks</label>
+                <input type="text" id="remarks" name="remarks" placeholder="This cat is very cute!">
 
-                <label for="caretaker">Caretaker Name</label><br>
-                <input type="text" id="caretaker" name="caretaker"><br>
-
-                <label for="remarks">Remarks</label><br>
-                <input type="text" id="remarks" name="remarks"><br>
-
-                <input type="submit" value="Submit">
+                <button type="submit">Submit</button>
 
             </form>
         </content>

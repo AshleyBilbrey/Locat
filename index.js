@@ -27,9 +27,9 @@ app.get("/map", function(req, res){
     const testImg = "https://magazine.ucdavis.edu/wp-content/uploads/2019/09/Cheeto-web-header.jpg"
 
     mapData.catMarkers = [
-        { _id: "jjfjdjeeee", name: "Cheeto", lat: 38.5449, lng: -121.7405, canpet: true, canfeed: false, healthy: false },
-        { _id: "jee333nendje", name: "Joe the Cat", lat: 38.5469, lng: -121.7465, canfeed: true },
-        { _id: "udjj3j3jjj", name: "boebinga", lat: 38.5369, lng: -121.7565, healthy: true },
+        { _id: "jjfjdjeeee", name: "Cheeto", lat: 38.5449, lng: -121.7405, remarks: "chonk", canpet: true, canfeed: false, healthy: false },
+        { _id: "jee333nendje", name: "Joe the Cat", lat: 38.5469, lng: -121.7465, remarks: "boknk", canfeed: true },
+        { _id: "udjj3j3jjj", name: "boebinga", lat: 38.5369, lng: -121.7565, remarks: "badonkadong", healthy: true },
     ]
 
     function showcats(results) {
@@ -87,7 +87,7 @@ app.post("/cat/new", (req, res) => {
 })
 
 app.get("/cat/new",  (req, res) => {
-    res.render("newcat.ejs")
+    res.render("newcat.ejs", {styles: ['form']});
 });
 
 app.get("/catimage/:id", (req, res) => {
