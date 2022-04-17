@@ -5,6 +5,7 @@ import ejs from 'ejs';
 import path from "path";
 import fs from "fs";
 import formidable from "formidable";
+import exifr from "exifr"
 import newCat from "./helpers/newCat.js"
 import findCat from "./helpers/findCat.js"
 import allCats from "./helpers/allCats.js";
@@ -44,6 +45,7 @@ app.post("/cat/new", (req, res) => {
         }
 
         function sendCat(catid) {
+
             console.log(files.picture)
             if(files.picture != null) {
                 console.log("Image exists")
@@ -55,11 +57,21 @@ app.post("/cat/new", (req, res) => {
                             console.log(err)
                         }
                         console.log("File copied!")
+                        exifr.gps('./pawnail/' + catid).then(({latitude, longitude}) => {
+                            console.log(latitude + " " + longitude)
+                            if(latitude && longitude) {
+                                updateLoc(catid, latitude, longitude, () => {
+                                    res.redirect("/cat/" + catid)
+                                })
+                            } else {
+                                res.redirect("/map/input/" + catid)
+                            }
+                        })
                     })
                 }
             }
 
-            res.redirect("/cat/" + catid);
+            
             
         }
 
@@ -103,11 +115,10 @@ app.get("/cat/:id", (req, res) => {
 })
 
 app.get("/cat", (req, res) => {
-    function sendCats(cats) {
-        res.send(cats)
-    }
 
-    allCats(sendCats)
+    allCats((cats) => {
+        res.send(cats);
+    })
 
 })
 
