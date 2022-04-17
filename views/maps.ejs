@@ -35,11 +35,9 @@
                 <% for (let catMarker of catMarkers) { %>
                     const contentString_<%=catMarker._id%> = '<div class="cat-content">' +
                         '<div class="cat-header">' + 
-                        <% if (catMarker.imgUrl) { %>
-                            '<div class="pawHolder">' + 
-                            '<img src="<%=catMarker.imgUrl%>" class="cat-paw"/>' + 
-                            '</div>' + 
-                        <% } %>
+                        '<div class="pawHolder">' + 
+                        '<img src="/catimage/<%=catMarker._id%>" class="cat-paw"/>' + 
+                        '</div>' + 
                         '<div>' + 
                         '<h2 class="cat-title"><a href="/cat/<%=catMarker._id%>"><%=catMarker.name%></a></h2>' +
                         '<div class="cat-icons">' +

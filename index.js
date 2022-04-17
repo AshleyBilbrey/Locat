@@ -26,12 +26,24 @@ app.get("/map", function(req, res){
     const testImg = "https://magazine.ucdavis.edu/wp-content/uploads/2019/09/Cheeto-web-header.jpg"
 
     mapData.catMarkers = [
-        { _id: "jjfjdjeeee", name: "Cheeto", imgUrl: cheetoImg, lat: 38.5449, lng: -121.7405, canpet: true, canfeed: false, healthy: false },
-        { _id: "jee333nendje", name: "Joe the Cat", imgUrl: testImg, lat: 38.5469, lng: -121.7465, canfeed: true },
-        { _id: "udjj3j3jjj", name: "boebinga", imgUrl: "", lat: 38.5369, lng: -121.7565, healthy: true },
+        { _id: "jjfjdjeeee", name: "Cheeto", lat: 38.5449, lng: -121.7405, canpet: true, canfeed: false, healthy: false },
+        { _id: "jee333nendje", name: "Joe the Cat", lat: 38.5469, lng: -121.7465, canfeed: true },
+        { _id: "udjj3j3jjj", name: "boebinga", lat: 38.5369, lng: -121.7565, healthy: true },
     ]
 
-    res.render("maps.ejs", mapData);
+    function showcats(results) {
+        const tempList = [];
+
+        results.forEach(e => { if(e.lat && e.lng){tempList.push(e)}});
+
+        mapData.catMarkers = tempList;
+
+        res.render("maps.ejs", mapData);
+    }
+
+    allCats(showcats);
+
+    // res.render("maps.ejs", mapData);
 });
 
 app.post("/cat/new", (req, res) => {
