@@ -2,9 +2,11 @@
     <head>
         <title>View <%= name %></title>
     
-        <link rel="stylesheet" type="text/css" href="/css/meow.css" />
-
+        <%- include('partials/head') %>
+    </head>
     <body>
+        <%- include('partials/header') %>
+
         <h1><%= name %></h1>
         <p>Such a cutie!</p>
     </body>
