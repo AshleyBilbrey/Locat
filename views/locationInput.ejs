@@ -83,6 +83,9 @@
                 xhr.onload = function() {
                     var data = JSON.parse(this.responseText);
                     console.log(data);
+                    if(data.success) {
+                        document.location.href = '/cat/<%=catId%>';
+                    }
                 };
             }
             

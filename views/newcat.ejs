@@ -7,34 +7,36 @@
     <body>
         <%- include('partials/header') %>
 
-        <h1>Add a Cat</h1>
-        <form method="post" enctype="multipart/form-data">
-            <label for="name">Cat Name</label><br>
-            <input type="text" id="name" name="name"><br>
+        <content>
+            <h1>Add a Cat</h1>
+            <form method="post" enctype="multipart/form-data">
+                <label for="name">Cat Name</label><br>
+                <input type="text" id="name" name="name"><br>
 
-            <label for="file">Cat Photo</label><br>
-            <input type="file" id="file" name="picture"><br>
-            
-            <label for="canpet">Petting Okay</label>
-            <input type="checkbox" id="canpet" name="canpet" value="canpet"><br>
+                <label for="file">Cat Photo</label><br>
+                <input type="file" id="file" name="picture"><br>
+                
+                <label for="canpet">Petting Okay</label>
+                <input type="checkbox" id="canpet" name="canpet" value="canpet"><br>
 
-            <label for="canfeed">Feeding Okay</label>
-            <input type="checkbox" id="canfeed" name="canfeed" value="canfeed"><br>
+                <label for="canfeed">Feeding Okay</label>
+                <input type="checkbox" id="canfeed" name="canfeed" value="canfeed"><br>
 
-            <label for="fixed">Fixed</label>
-            <input type="checkbox" id="fixed" name="fixed" value="fixed"><br>
+                <label for="fixed">Fixed</label>
+                <input type="checkbox" id="fixed" name="fixed" value="fixed"><br>
 
-            <label for="healthy">Healthy</label>
-            <input type="checkbox" id="healthy" name="healthy" value="healthy"><br>
+                <label for="healthy">Healthy</label>
+                <input type="checkbox" id="healthy" name="healthy" value="healthy"><br>
 
-            <label for="caretaker">Caretaker Name</label><br>
-            <input type="text" id="caretaker" name="caretaker"><br>
+                <label for="caretaker">Caretaker Name</label><br>
+                <input type="text" id="caretaker" name="caretaker"><br>
 
-            <label for="remarks">Remarks</label><br>
-            <input type="text" id="remarks" name="remarks"><br>
+                <label for="remarks">Remarks</label><br>
+                <input type="text" id="remarks" name="remarks"><br>
 
-            <input type="submit" value="Submit">
+                <input type="submit" value="Submit">
 
-        </form>
+            </form>
+        </content>
     </body>
 </html>

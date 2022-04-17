@@ -28,35 +28,43 @@
 
                 const infoWindow = new google.maps.InfoWindow({});
 
+                google.maps.event.addListener(map, 'click', function() {
+                    infoWindow.close();
+                });
+
                 <% for (let catMarker of catMarkers) { %>
-                    const contentString_<%=catMarker.id%> = '<div class="cat-content">' +
+                    const contentString_<%=catMarker._id%> = '<div class="cat-content">' +
                         '<div class="cat-header">' + 
                         <% if (catMarker.imgUrl) { %>
+                            '<div class="pawHolder">' + 
                             '<img src="<%=catMarker.imgUrl%>" class="cat-paw"/>' + 
+                            '</div>' + 
                         <% } %>
-                        '<h2 class="cat-title"><a href="/cat/<%=catMarker.id%>"><%=catMarker.name%></a></h2>' +
-                        '</div>' + 
-                        '<div class="bodyContent">' +
+                        '<div>' + 
+                        '<h2 class="cat-title"><a href="/cat/<%=catMarker._id%>"><%=catMarker.name%></a></h2>' +
                         '<div class="cat-icons">' +
-                        '<img src=""/>' +
-                        '<img src=""/>' +
-                        '<img src=""/>' +
+                        '<img src="/images/<%= catMarker.canpet ? "Pet.png" : "NoPet.png"%>" alt="<%= catMarker.canpet ? "You can pet this cat!" : "Do not pet this cat!"%>"/>' +
+                        '<img src="/images/<%= catMarker.canfeed ? "Feed.png" : "NoFeed.png"%>" alt="<%= catMarker.canfeed ? "You can feed this cat!" : "Do not feed this cat!"%>"/>' +
+                        '<img src="/images/<%= catMarker.healthy ? "Healthy.png" : "NoHealthy.png"%>" alt="<%=catMarker.healthy ? "This cat is healthy." : "This cat is not healthy :("%>"/>' +
                         '<img src=""/>' +
                         '</div>' +
+                        '</div>' +
+                        '</div>' + 
+                        '<div class="bodyContent">' +
                         "<p><%=catMarker.name%> is a cat. They are really cute.</p>" +
                         "</div>" + 
                         "</div>";
 
-                    const marker_<%=catMarker.id%>  = new google.maps.Marker({
+                    const marker_<%=catMarker._id%>  = new google.maps.Marker({
                         position: { lat: <%= catMarker.lat%>, lng: <%= catMarker.lng %> },
                         map: map,
                         icon: "<%=markerIconUrl%>",
                     });
 
                     // adding a listener to pop up the info box upon clicking
-                    marker_<%=catMarker.id%>.addListener("click", () => {
-                        infoWindow.open(map, marker_<%=catMarker.id%>);
-                        infoWindow.setContent(contentString_<%=catMarker.id%>);
+                    marker_<%=catMarker._id%>.addListener("click", () => {
+                        infoWindow.open(map, marker_<%=catMarker._id%>);
+                        infoWindow.setContent(contentString_<%=catMarker._id%>);
                     });
                 <% } %>
             }
