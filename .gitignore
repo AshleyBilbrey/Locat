@@ -1,5 +1,5 @@
 .env
 /node_modules
 test_creds.json
-training
 .DS_Store
+__pycache__
