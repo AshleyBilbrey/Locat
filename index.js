@@ -188,8 +188,8 @@ app.post("/cat", (req, res) => {
 
             fs.readFile("files.picture.filepath", (err, file) => {
                 if(file) {
-                    axios.post("url", { query: {image: file, info: imageData}}).then(res => {
-                        searchTerm = res.body;
+                    axios.post("34.82.139.163:5000/identify", { query: {image: file, info: imageData}}).then(res => {
+                        searchTerm = res.name;
                     });
                 } else {
                     return res.status(500).send("Sorry, there was an error processing your request.")
