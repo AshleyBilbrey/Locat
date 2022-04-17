@@ -134,13 +134,13 @@ app.get("/checkimg/:id", (req, res) => {
 })
 
 app.get("/cat/:id", (req, res) => {
-
     findCat(req.params.id, (catributes) => {
         allCheckIns(req.params.id, (allCheckIns) => {
+            const mapData = constructMap();
             console.log("Found check ins for kitty:")
             console.log(allCheckIns)
             catributes.checkIns = allCheckIns;
-            res.render("viewcat.ejs", catributes)
+            res.render("viewcat.ejs", Object.assign(catributes, mapData))
         })
         
     })

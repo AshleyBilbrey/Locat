@@ -1,8 +1,57 @@
 <html>
     <head>
-        <title>View <%= name %></title>
+        <title><%= name %></title>
     
         <%- include('partials/head') %>
+
+        <!-- the google maps script -->
+        <script
+            src="http://maps.googleapis.com/maps/api/js?<%= gapiOptions %>"
+            defer
+        ></script>
+
+        <script>
+            // Initialize and add the map
+            function initMap() {
+                // The location of Davis
+                const davis = { lat: 38.5449, lng: -121.7405 };
+                // The map, centered at davis
+                const map = new google.maps.Map(document.getElementById("map"), {
+                    zoom: <%= zoomLevel %>,
+                    center: davis,
+                    styles: <%- include('partials/mapStyles.ejs') %>,
+                    mapTypeControl: false,
+                    streetViewControl: false,
+                    clickableIcons: false,
+                });
+
+                const infoWindow = new google.maps.InfoWindow({});
+
+                google.maps.event.addListener(map, 'click', function() {
+                    infoWindow.close();
+                });
+
+                <% for (let catMarker of checkIns) { %>
+                    const contentString_<%=catMarker._id%> = '<div class="cat-content">' +
+                        '<img src="/checkimg/<%= catMarker._id %>" class="cat-paw"/>' + 
+                        "</div>";
+
+                    const marker_<%=catMarker._id%>  = new google.maps.Marker({
+                        position: { lat: <%= catMarker.lat%>, lng: <%= catMarker.lng %> },
+                        map: map,
+                        icon: "<%=markerIconUrl%>",
+                    });
+
+                    // adding a listener to pop up the info box upon clicking
+                    marker_<%=catMarker._id%>.addListener("click", () => {
+                        infoWindow.open(map, marker_<%=catMarker._id%>);
+                        infoWindow.setContent(contentString_<%=catMarker._id%>);
+                    });
+                <% } %>
+            }
+            
+            window.initMap = initMap;
+        </script>
     </head>
     <body>
         <%- include('partials/header') %>
@@ -22,6 +71,7 @@
                 <li class="catli"><img class="liimg" src="/images/CareTaker.png"><div>Caretaker: <%= caretaker %><br><a href="/contact/<%= _id %>">Contact this caretaker.</a></div></li>
             </ul>
             <h1>Check Ins</h1><br><br><br>
+            <div id="map"></div>
             <% checkIns.forEach((checkin) => { %>
                 <div class="checkindiv">
                     <img class="checkinimg" src="/checkimg/<%= checkin._id %>">
