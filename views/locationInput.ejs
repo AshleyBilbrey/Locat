@@ -63,8 +63,7 @@
                     let latlngObj = event.latLng.toJSON();
 
                     const markerContent = '<h2>Cat\'s Location</h2>' +
-                        event.latLng +
-                        '<br/>' +
+                        '<p>' + event.latLng + '</p>' + 
                         '<button onclick="confirmCat(' + latlngObj.lat + ', ' + latlngObj.lng + ')">Confirm</button>';
 
                     marker = createMarker(event.latLng, "name", markerContent);
@@ -97,7 +96,7 @@
         <%- include('partials/header') %>
 
         <div id="notice">
-            <h2>Please input this cat's location!</h2>
+            <h3>Please input this cat's location!</h3>
         </div>
 
         <div id="map"></div>

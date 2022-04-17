@@ -46,9 +46,17 @@
     font-size: 16px;
 }
 
+/* FORM Stuff */
+
+form {
+    display: flex;
+    align-items: center;
+}
+
 input[type="text"],
 textarea,
 select {
+    flex-grow: 1;
     background: rgba(255, 255, 255, 0.1);
     border: none;
     font-size: 16px;
@@ -56,9 +64,40 @@ select {
     margin: 0;
     outline: 0;
     padding: 15px;
-    width: 100%;
+    /* width: 100%; */
     background-color: #e8eeef;
     color: #8a97a0;
     box-shadow: 0 1px 0 rgba(0, 0, 0, 0.03) inset;
-    margin-bottom: 30px;
+    margin-right: 5px;
+    /* display: inline-block; */
+}
+
+/* File Upload Stuff */
+#upload-button-wrapper {
+    position: relative;
+    overflow: hidden;
+    /* display: inline-block; */
+    /* margin: auto;
+
+    left: 50%;
+    transform: translate(-50%, 0); */
+}
+
+#upload-button {
+    border: 2px solid gray;
+    color: gray;
+    background-color: white;
+    padding: 8px 20px;
+    border-radius: 8px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+#upload-button-wrapper input[type=file] {
+    font-size: 100px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+    cursor: pointer;
 }

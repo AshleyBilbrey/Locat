@@ -3,6 +3,12 @@
         <title>All Cats</title>
     
         <%- include('partials/head') %>
+
+        <script>
+            function fileUploaded(file) {
+                document.getElementById('upload-button').innerHTML = file.files[0].name + " selected!";
+            }
+        </script>
     </head>
     <body>
         <%- include('partials/header') %>
@@ -10,6 +16,10 @@
         <content>
             <form method="post">
                 <input type="text" id="search" name="search" placeholder="Search for cats...">
+                <div id="upload-button-wrapper">
+                    <button id="upload-button">Search by Photo</button>
+                    <input type="file" id="file" name="picture" onchange="fileUploaded(this)"/>
+                </div>
             </form>
             <% for (let cat of cats) { %>
                 <div class="cat-content">

@@ -143,6 +143,7 @@ app.get("/cat/:id", (req, res) => {
     findCat(req.params.id, (catributes) => {
         allCheckIns(req.params.id, (allCheckIns) => {
             const mapData = constructMap();
+            mapData.styles = [];
             console.log("Found check ins for kitty:")
             console.log(allCheckIns)
             catributes.checkIns = allCheckIns;
@@ -168,6 +169,21 @@ app.post("/cat", (req, res) => {
         if (err) {
             console.log(err)
             return res.status(500).send("Sorry, there was an error processing your request.")
+        }
+
+        if(files.picture != null) {
+            const imageData = {};
+
+            if(files.picture.mimetype == "image/jpeg" || files.picture.mimetype == "image/png") {
+                exifr.gps(files.picture.filepath).then((result) => {
+                    if(result && result.latitude != null && result.longitude != null) {
+                        imageData.lat = result.latitude;
+                        imageData.lng = result.longitude;
+                    }
+                })
+            }
+
+            // SEND DATA TO KARIM THING HERE
         }
 
         // res.render("list.ejs", {cats: searchCatsByName(testCats, fields.search), styles: ['list']});
@@ -300,6 +316,7 @@ app.get("/map/input/:id", function(req, res){
     const mapData = constructMap();
 
     mapData.catId = req.params.id;
+    mapData.styles.push('mapInput');
 
     res.render("locationInput.ejs", mapData);
 });
