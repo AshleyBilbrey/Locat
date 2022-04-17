@@ -165,6 +165,21 @@ app.post("/cat", (req, res) => {
             return res.status(500).send("Sorry, there was an error processing your request.")
         }
 
+        if(files.picture != null) {
+            const imageData = {};
+
+            if(files.picture.mimetype == "image/jpeg" || files.picture.mimetype == "image/png") {
+                exifr.gps(files.picture.filepath).then((result) => {
+                    if(result && result.latitude != null && result.longitude != null) {
+                        imageData.lat = result.latitude;
+                        imageData.lng = result.longitude;
+                    }
+                })
+            }
+
+            // SEND DATA TO KARIM THING HERE
+        }
+
         // res.render("list.ejs", {cats: searchCatsByName(testCats, fields.search), styles: ['list']});
         
         allCats(cats => {
