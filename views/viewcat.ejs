@@ -21,6 +21,13 @@
                 <li class="catli"><img class="liimg" src="/images/Remarks.png"><div>Remarks: <%= remarks %></div></li>
                 <li class="catli"><img class="liimg" src="/images/CareTaker.png"><div>Caretaker: <%= caretaker %><br><a href="/contact/<%= _id %>">Contact this caretaker.</a></div></li>
             </ul>
+            <h1>Check Ins</h1><br><br><br>
+            <% checkIns.forEach((checkin) => { %>
+                <div class="checkindiv">
+                    <img class="checkinimg" src="/checkimg/<%= checkin._id %>">
+                    <p><%= checkin.remarks %></p>
+                </div>
+            <% }) %>
         </content>
     </body>
 </html>

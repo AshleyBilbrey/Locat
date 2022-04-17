@@ -1,6 +1,6 @@
 .env
 /node_modules
 test_creds.json
-/pawnail
-/checkimg
-/tmp
+/pawnail/*
+/checkimg/*
+/tmp/*

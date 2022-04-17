@@ -15,7 +15,7 @@ const newCheckIn = async (checkin, parentid , callback) => {
 
             console.log("Inserting...")
             console.log(toInsert)
-            dbo.collection("cats").insertOne(toInsert, (err, result) => {
+            dbo.collection("checkins").insertOne(toInsert, (err, result) => {
                     if(err) {
                         console.log(err);
                         callback(null);

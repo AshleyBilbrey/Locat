@@ -4,7 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "dev": "export GOOGLE_APPLICATION_CREDENTIALS='./test_creds.json'; nodemon index.js",
+    "dev": "export GOOGLE_APPLICATION_CREDENTIALS='./test_creds.json'; touch ./pawnail/meow.txt; touch ./checkimg/nya.txt; nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",

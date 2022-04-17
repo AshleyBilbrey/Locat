@@ -13,6 +13,7 @@ import constructMap from "./helpers/setUpMap.js";
 import updateLoc from "./helpers/updateLoc.js";
 import updateCheckInLoc from "./helpers/updateCheckInLoc.js";
 import newCheckIn from "./helpers/newCheckIn.js";
+import allCheckIns from "./helpers/allCheckIns.js";
 
 const app = express();
 const port = process.env.PORT || 8080;
@@ -109,10 +110,36 @@ app.get("/catimage/:id", (req, res) => {
     })
 })
 
+app.get("/checkimg/:id", (req, res) => {
+    fs.readFile("./checkimg/" + req.params.id, (err, file) => {
+        if(file) {
+            res.send(file)
+        } else {
+            fs.readFile("./static/images/AddCatIcon.png", (err, file2) => {
+                if(err) {
+                    console.log(err)
+                    res.send(null)
+                } else {
+                    console.log("Sending placeholder...")
+                    res.send(file2)
+                }
+                
+            })
+        }
+        
+    })
+})
+
 app.get("/cat/:id", (req, res) => {
 
     findCat(req.params.id, (catributes) => {
-        res.render("viewcat.ejs", catributes)
+        allCheckIns(req.params.id, (allCheckIns) => {
+            console.log("Found check ins for kitty:")
+            console.log(allCheckIns)
+            catributes.checkIns = allCheckIns;
+            res.render("viewcat.ejs", catributes)
+        })
+        
     })
 
 })
@@ -133,6 +160,13 @@ app.get("/cat", (req, res) => {
 
 app.get("/", (req, res) => {
     res.redirect("/map")
+})
+
+app.get("/update/:id", (req, res) => {
+    findCat(req.params.id, (catributes) => {
+        catributes.styles = ['form'];
+        res.render("updateCat.ejs", catributes)
+    })
 })
 
 app.get("/checkin/:id", (req, res) => {
