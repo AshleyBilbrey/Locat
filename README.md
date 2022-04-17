@@ -24,22 +24,22 @@
 ⭐️ Click loads of pictures of cats and add them along with their location📍<br>   
 
 <h2>Paw-sible Users</h2>
-👤 <br>
-👤 <br>
-👤 <br>
-👤 <br>
+👤 Cheeto lovers <br>
+👤 Campus explorers <br>
+👤 Spay Neuter Clinics?? <br>
+👤 Cat paw-parazzi <br>
 
 <h2>Meow It Works</h2>
-• <br>
-• <br>
-• <br>
-• <br>
+• EJS renders our HTML programmatically <br>
+• Express serves user-facing files and handles HTTP requests <br>
+• MongoDB stores all of the cats and their catributes <br>
+• Google Cloud assists in map rendering, ML model training, and hosting. <br>
 
 <h2>Tech Stack</h2>      
-💻 <br>  
-💻 <br>  
-💻 <br>  
-💻 <br>  
+💻 <a href="https://ejs.co/">e.js</a> <br>  
+💻 <a href="https://expressjs.com/">Express</a> <br>  
+💻 <a href="https://developers.google.com/maps">Google Maps API</a> <br>  
+💻 <a href="https://www.mongodb.com/">MongoDB</a> <br>  
 
 
 <h2>Our Unfur-gettable Team</h2>
