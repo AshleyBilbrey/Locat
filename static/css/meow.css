@@ -296,3 +296,19 @@ h1 {
     cursor: pointer;
     text-decoration: none;
 }
+
+.checkindiv {
+    width: 100%;
+    background-color: #f4f7f8;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.checkinimg {
+    width: 80%;
+}

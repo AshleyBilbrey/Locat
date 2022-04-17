@@ -1,0 +1,40 @@
+<html>
+    <head>
+        <title>Update <%= name %></title>
+    
+        <%- include('partials/head') %>
+
+        <script>
+            function fileUploaded(file) {
+                document.getElementById('upload-button').innerHTML = file.files[0].name + " selected!";
+            }
+        </script>
+    </head>
+    <body>
+        <%- include('partials/header') %>
+
+        <content>
+            <h1>Update <%= name %></h1>
+            <form method="post" enctype="multipart/form-data">
+                                
+                <input type="checkbox" id="canpet" name="canpet" value="canpet">
+                <label class="light" for="canpet">Petting Okay</label><br/>
+                
+                <input type="checkbox" id="canfeed" name="canfeed" value="canfeed">
+                <label class="light" for="canfeed">Feeding Okay</label><br/>
+
+                <input type="checkbox" id="fixed" name="fixed" value="fixed">
+                <label class="light" for="fixed">Fixed</label><br/>
+                
+                <input type="checkbox" id="healthy" name="healthy" value="healthy">
+                <label class="light" for="healthy" value="selected" checked>Healthy</label>
+
+                <label for="remarks">Remarks</label>
+                <input type="text" id="remarks" name="remarks" placeholder="This cat is very cute!">
+                
+                <button type="submit">Submit</button>
+
+            </form>
+        </content>
+    </body>
+</html>
