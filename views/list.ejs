@@ -8,7 +8,9 @@
         <%- include('partials/header') %>
 
         <content>
-            <h1>All Cats</h1>
+            <form method="post">
+                <input type="text" id="search" name="search" placeholder="Search for cats...">
+            </form>
             <% for (let cat of cats) { %>
                 <div class="cat-content">
                     <div class="cat-header">
@@ -28,6 +30,12 @@
                     <p><%=cat.remarks%></p>
                 </div>
             <% } %>
+            <div class="cat-content" style="background-color:rgb(253, 228, 232);">
+                <div class="cat-header">
+                    <h2 style="text-align:center;margin:auto;"><a href="/cat/new">Add a cat!</a></h2>
+                </div>
+                <p>If you can't find the cat you're looking for, feel free to add them!</p>
+            </div>
         </content>
     </body>
 </html>
