@@ -1,7 +1,7 @@
 import { MongoClient } from "mongodb"
 
 const newCat = async (catributes, callback) => {
-    MongoClient.connect("mongodb://localhost:27017/your-story", { useUnifiedTopology: true }, (err, db) => {
+    MongoClient.connect("mongodb://0.0.0.0:27017/your-story", { useUnifiedTopology: true }, (err, db) => {
         if(err) {
             console.log(err);
             callback(null);
