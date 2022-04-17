@@ -7,6 +7,12 @@ const newCat = async (catributes, callback) => {
             callback(null);
         }
         var dbo = db.db("locat");
+            var phoneNum
+            if(catributes.caretakernumber.length == 10) {
+                phoneNum = "+1" + catributes.caretakernumber;
+            } else {
+                phoneNum = null;
+            }
             const toInsert = {
                 name: catributes.name,
                 canpet: catributes.canpet ? true : false,
@@ -14,7 +20,7 @@ const newCat = async (catributes, callback) => {
                 fixed: catributes.fixed ? true : false,
                 healthy: catributes.healthy ? true : false,
                 caretaker: catributes.caretaker,
-                caretakernumber: catributes.caretakernumber,
+                caretakernumber: phoneNum,
                 remarks: catributes.remarks,
                 iscat: true
             }

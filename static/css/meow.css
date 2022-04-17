@@ -312,3 +312,27 @@ h1 {
 .checkinimg {
     width: 80%;
 }
+
+.largeimg {
+    width: 50%;
+    padding: 20px;
+}
+
+.infopl {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.infopr {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+}
+
+.vert {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+}
