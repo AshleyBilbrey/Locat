@@ -22,7 +22,7 @@ import numpy as np
 import pickle
 import json
 
-ACCURACY_THRESHOLD = 0.98
+ACCURACY_THRESHOLD = 0.99
 EPOCHS = 200
 
 class myCallback(tf.keras.callbacks.Callback):
@@ -132,11 +132,11 @@ def get_features(path):
     image = Image.open(path)
     cropped_image = crop_image(image, dimensions)
     matte_image = inference.predict(
-        cropped_image, "./shadow/", "model/modnet_photographic_portrait_matting.ckpt", path)
+        cropped_image, "./images/shadow/", "model/modnet_photographic_portrait_matting.ckpt", path)
     combined = combined_display(cropped_image, matte_image)
     if SAVE_MODE:
         combined.save(os.path.join(
-            "./output/", f"{path.split('/')[-1]}_extracted.png"))
+            "./images/output/", f"{path.split('/')[-1]}_extracted.png"))
     combined_google = treat_image(combined)
     return detect_properties(combined_google)
 
@@ -180,7 +180,7 @@ def treat_training_data(config_path):
 def create_callback(early=False, patience=10, min_delta=0.0001):
     callback = [ModelCheckpoint('model/trained/current.h5', verbose=0,
         save_best_only=False, save_weights_only=False, save_freq='epoch')]
-    callback.append(myCallback())
+    # callback.append(myCallback())
     if early:
         callback.append(EarlyStopping(monitor='loss', min_delta=0.0001, patience=5, verbose=1))
     return callback
@@ -197,7 +197,7 @@ def train_model(feature_train, label_train, feature_test, label_test, early_stop
     # creating callback, which stops if not improved by min_delta in patience epochs
     callback = create_callback()
     # training the recurrent neural network
-    model.fit(feature_train, label_train, epochs=50, batch_size=4, verbose=1, callbacks=callback, validation_data=(feature_test, label_test))
+    model.fit(feature_train, label_train, epochs=100, batch_size=3, verbose=1, callbacks=callback, validation_data=(feature_test, label_test))
     # predicting using trained model
     predictions = model.predict(feature_test)
     predictions = np.array([np.argmax(pred) for pred in predictions])
@@ -216,5 +216,4 @@ def driver_function(config_path):
     train_model(feature_train, label_train, feature_test, label_test)
     pass
 
-# driver_function("training/manifest.json")
-driver_function("training/cat_1.png")
+driver_function("training/manifest.json")
