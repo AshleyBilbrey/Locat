@@ -56,8 +56,7 @@ app.post("/cat/new", (req, res) => {
             return res.status(500).send("Sorry, there was an error processing your request.")
         }
 
-        function sendCat(catid) {
-
+        newCat(fields, (catid) => {
             console.log(files.picture)
             if(files.picture != null) {
                 console.log("Image exists")
@@ -69,26 +68,20 @@ app.post("/cat/new", (req, res) => {
                             console.log(err)
                         }
                         console.log("File copied!")
-                        exifr.gps('./pawnail/' + catid).then(({latitude, longitude}) => {
-                            console.log(latitude + " " + longitude)
-                            if(latitude && longitude) {
-                                updateLoc(catid, latitude, longitude, () => {
+                        exifr.gps('./pawnail/' + catid).then((result) => {
+                            if(result && result.latitude != null && result.longitude != null) {
+                                updateLoc(catid, result.latitude, result.longitude, () => {
                                     res.redirect("/cat/" + catid)
                                 })
                             } else {
                                 res.redirect("/map/input/" + catid)
                             }
+                            
                         })
                     })
                 }
             }
-
-            
-            
-        }
-
-        newCat(fields, sendCat)
-        
+        });  
         
     })
 })
@@ -118,11 +111,10 @@ app.get("/catimage/:id", (req, res) => {
 })
 
 app.get("/cat/:id", (req, res) => {
-    function sendCat(catributes) {
-        res.render("viewcat.ejs", catributes)
-    }
 
-    findCat(req.params.id, sendCat)
+    findCat(req.params.id, (catributes) => {
+        res.render("viewcat.ejs", catributes)
+    })
 
 })
 
@@ -159,11 +151,9 @@ app.post("/map/input/:id", function(req, res){
     console.log(req.body);
     console.log(req.params.id);
 
-    function toRespond(response) {
-        res.send(response)
-    }
-
-    updateLoc(req.params.id, req.body.lat, req.body.lng, toRespond)
+    updateLoc(req.params.id, req.body.lat, req.body.lng, (response) => {
+        res.send(response);
+    })
 })
 
 app.listen(port);
