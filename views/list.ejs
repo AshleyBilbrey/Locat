@@ -1,0 +1,19 @@
+<html>
+    <head>
+        <title>All Cats</title>
+    
+        <%- include('partials/head') %>
+    </head>
+    <body>
+        <%- include('partials/header') %>
+
+        <content>
+            <h1>All Cats</h1>
+            <% for (let cat of cats) { %>
+                <div class="Cat">
+                    <h2><%=cat.name%></h2>
+                </div>
+            <% } %>
+        </content>
+    </body>
+</html>
