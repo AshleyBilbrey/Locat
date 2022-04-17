@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700&display=swap');
 
 body {
     font-family: 'Plus Jakarta Sans', sans-serif;
@@ -18,7 +18,7 @@ content {
 
 h1 {
     font-size: 48px;
-    font-style: bold;
+    font-weight: bold;
     text-align: center;
 }
 
@@ -147,6 +147,7 @@ h1 {
 #hamburger {
     display: block;
     position: relative;
+    left: -2px;
 }
 
 #hamburger span
