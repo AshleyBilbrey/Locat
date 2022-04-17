@@ -1,0 +1,28 @@
+<html>
+    <head>
+        <title>Contact <%= caretaker %></title>
+    
+        <%- include('partials/head') %>
+
+        <script>
+            function fileUploaded(file) {
+                document.getElementById('upload-button').innerHTML = file.files[0].name + " selected!";
+            }
+        </script>
+    </head>
+    <body>
+        <%- include('partials/header') %>
+
+        <content>
+            <h1>Contact <%= caretaker %> - <%= name %>'s Caretaker</h1>
+            <form method="post" enctype="multipart/form-data">
+
+                <label for="message">Message</label>
+                <input type="text" id="message" name="message" placeholder="Hi <%= caretaker %>! I think your cat is cute! Please email me at...">
+                
+                <button type="submit">Submit</button>
+
+            </form>
+        </content>
+    </body>
+</html>

@@ -4,3 +4,5 @@ test_creds.json
 /pawnail/*
 /checkimg/*
 /tmp/*
+.DS_Store
+__pycache__

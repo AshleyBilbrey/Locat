@@ -15,6 +15,12 @@ import updateCheckInLoc from "./helpers/updateCheckInLoc.js";
 import newCheckIn from "./helpers/newCheckIn.js";
 import searchCatsByName from "./helpers/searchCatsByName.js";
 import allCheckIns from "./helpers/allCheckIns.js";
+import updateCat from "./helpers/updateCat.js";
+
+const accountSid = process.env.TWILIO_ACCOUNT_SID;
+const authToken = process.env.TWILIO_AUTH_TOKEN;
+const twilioNum = process.env.TWILIO_NUM;
+import twilio from "twilio"
 
 const app = express();
 const port = process.env.PORT || 8080;
@@ -200,6 +206,21 @@ app.get("/update/:id", (req, res) => {
     })
 })
 
+app.post("/update/:id", (req, res) => {
+    const form = new formidable.IncomingForm();
+    form.parse(req, (err, fields, files) => {
+        if(err) {
+            console.log(err)
+            return res.status(500).send("Sorry, there was an issue processing your request.")
+        }
+        console.log("Update form:")
+        console.log(fields)
+        updateCat(req.params.id, fields.canpet, fields.canfeed, fields.fixed, fields.healthy, fields.remarks, () => {
+            res.redirect("/cat/" + req.params.id);
+        })
+    })
+})
+
 app.get("/checkin/:id", (req, res) => {
     findCat(req.params.id, (catributes) => {
         console.log(catributes)
@@ -248,6 +269,40 @@ app.post("/checkin/:id", (req, res) => {
     })
 })
 
+app.get("/contact/:id", (req, res) => {
+    findCat(req.params.id, (catributes) => {
+        catributes.styles = ['form'];
+        res.render("contact.ejs", catributes)
+    })
+})
+
+app.post("/contact/:id", (req, res) => {
+    console.log("Got contact post...")
+    const form = new formidable.IncomingForm();
+
+    form.parse(req, (err, fields, files) => {
+        if(err) {
+            console.log(err);
+            return res.status(500).send("Sorry, there was an error processing your request.")
+        }
+        findCat(req.params.id, (catributes) => {
+            if(catributes.caretakernumber != null) {
+                console.log("Sending message to " + catributes.caretakerNumber)
+                console.log(fields.message)
+                twilio(accountSid, authToken).messages.create({body: fields.message, from: twilioNum, to: catributes.caretakernumber})
+                .then((message) => {
+                    console.log(message);
+                    res.redirect("/sent")
+                });
+                
+            } else {
+                res.send("Sorry, there was an error processing your request.")
+            }
+        })
+        
+    })
+})
+
 // info page
 app.get("/info", function(req, res) {
     res.render("info.ejs");
@@ -287,6 +342,10 @@ app.post("/map/checkin/:id", (req, res) => {
     updateCheckInLoc(req.params.id, req.body.lat, req.body.lng, (response) => {
         res.send(response);
     })
+})
+
+app.get("/sent", (req, res) => {
+    res.render("messagesent.ejs")
 })
 
 app.listen(port);

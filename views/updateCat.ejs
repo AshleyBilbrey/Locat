@@ -14,23 +14,23 @@
         <%- include('partials/header') %>
 
         <content>
-            <h1>Update <%= name %></h1>
+            <h1>Contact <%= name %></h1>
             <form method="post" enctype="multipart/form-data">
                                 
-                <input type="checkbox" id="canpet" name="canpet" value="canpet">
+                <input type="checkbox" id="canpet" name="canpet" value="canpet" <%= canpet ? 'checked' : null %>>
                 <label class="light" for="canpet">Petting Okay</label><br/>
                 
-                <input type="checkbox" id="canfeed" name="canfeed" value="canfeed">
+                <input type="checkbox" id="canfeed" name="canfeed" value="canfeed" <%= canfeed ? 'checked' : null %>>
                 <label class="light" for="canfeed">Feeding Okay</label><br/>
 
-                <input type="checkbox" id="fixed" name="fixed" value="fixed">
+                <input type="checkbox" id="fixed" name="fixed" value="fixed" <%= fixed ? 'checked' : null %>>
                 <label class="light" for="fixed">Fixed</label><br/>
                 
-                <input type="checkbox" id="healthy" name="healthy" value="healthy">
-                <label class="light" for="healthy" value="selected" checked>Healthy</label>
+                <input type="checkbox" id="healthy" name="healthy" value="healthy" <%= healthy ? 'checked' : null %>>
+                <label class="light" for="healthy">Healthy</label>
 
                 <label for="remarks">Remarks</label>
-                <input type="text" id="remarks" name="remarks" placeholder="This cat is very cute!">
+                <input type="text" id="remarks" name="remarks" placeholder="This cat is very cute!" value="<%= remarks %>">
                 
                 <button type="submit">Submit</button>
 

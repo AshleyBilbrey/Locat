@@ -7,7 +7,7 @@ const updateCheckInLoc = async (id, lat, lng, callback) => {
             callback({success: false});
         }
         var dbo = db.db("locat");
-        dbo.collection("checkin").updateOne({_id: ObjectId(id)}, { $set: { lat: lat, lng: lng }}, (err, result) => {
+        dbo.collection("checkins").updateOne({_id: ObjectId(id)}, { $set: { lat: lat, lng: lng }}, (err, result) => {
             let toRet = err ? {success: false} : {success: true}
             callback(toRet);
         })
