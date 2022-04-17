@@ -246,6 +246,7 @@ app.get("/map/input/:id", function(req, res){
     const mapData = constructMap();
 
     mapData.catId = req.params.id;
+    mapData.styles.push('mapInput');
 
     res.render("locationInput.ejs", mapData);
 });
