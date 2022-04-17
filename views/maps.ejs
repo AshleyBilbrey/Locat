@@ -34,7 +34,13 @@
                         <% } %>
                         '<h1 class="cat-title"><a href="/cat/<%=catMarker.id%>"><%=catMarker.name%></a></h1>' +
                         '</div>' + 
-                        '<div id="bodyContent">' +
+                        '<div class="bodyContent">' +
+                        '<div class="cat-icons">' +
+                        '<img src=""/>' +
+                        '<img src=""/>' +
+                        '<img src=""/>' +
+                        '<img src=""/>' +
+                        '</div>' +
                         "<p><%=catMarker.name%> is a cat. They are really cute.</p>" +
                         "</div>" + 
                         "</div>";
@@ -46,7 +52,7 @@
                     const marker_<%=catMarker.id%>  = new google.maps.Marker({
                         position: { lat: <%= catMarker.lat%>, lng: <%= catMarker.lng %> },
                         map: map,
-                        icon: "https://media.discordapp.net/attachments/963907404007870566/965023021465231410/MapPin.png",
+                        icon: "https://cdn.discordapp.com/attachments/963907404007870566/965097763912183828/HackDavis22MapPin-13.png",
                     });
 
                     // adding a listener to pop up the info box upon clicking
