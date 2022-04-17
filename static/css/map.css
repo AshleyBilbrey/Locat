@@ -1,27 +1,43 @@
 body {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
-h1 {
-    font-size: 64px;
+header {
+  position: absolute;
+  pointer-events: none;
+  z-index: 69;
+}
+
+nav {
+  pointer-events: all;
 }
 
 .cat-header {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
+}
+
+.cat-header a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.cat-header a:hover {
+  color: tomato;
 }
 
 .cat-thumb {
-    width: 64px;
+  width: 64px;
 }
 
 /* Set the size of the div element that contains the map */
 #map {
-    width: 100%;
-    /* The width is the width of the web page */
+  width: 100%;
+  /* The width is the width of the web page */
 
-    /* this will make the map take up the rest of the page */
-    flex-grow: 1;
+  /* this will make the map take up the rest of the page */
+  flex-grow: 1;
 }
+

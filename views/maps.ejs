@@ -1,25 +1,8 @@
 <html>
     <head>
         <title>Locat Map</title>
-        <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
-    
-        <!-- <link rel="stylesheet" type="text/css" href="./style.css" /> -->
-
-        <!-- page specific scripts -->
-        <% if (typeof libs !== 'undefined') { %>
-            <% for (let lib of libs) { %>
-                <script src='/js/<%= lib %>.js' type='text/javascript' defer></script>
-            <% } %>
-        <% } %>
-
-        <!-- styles specific to individual pages -->
-        <% if (typeof styles !== 'undefined') { %>
-            <% if (styles.length > 0) { %>
-                <% for (let style of styles) { %>
-                    <link rel="stylesheet" href="/css/<%= style %>.css">
-                <% } %>
-            <% } %>
-        <% } %>
+        
+        <%- include('partials/head.ejs') %>
 
         <!-- the google maps script -->
         <script
@@ -38,33 +21,38 @@
                 const map = new google.maps.Map(document.getElementById("map"), {
                     zoom: <%= zoomLevel %>,
                     center: davis,
+                    styles: <%- include('partials/mapStyles.ejs') %>,
+                    mapTypeControl: false,
+                    streetViewControl: false,
                 });
 
-                <% console.log(catMarkers) %>
                 <% for (let catMarker of catMarkers) { %>
-                    console.log(<%= catMarker.lat%>);
-
-                    const contentString_<%=catMarker.name%> = '<div id="content">' +
-                        '<div id="siteNotice">' +
-                        "</div>" +
-                        '<h1 id="firstHeading" class="firstHeading"><%=catMarker.name%></h1>' +
+                    const contentString_<%=catMarker.id%> = '<div class="cat-content">' +
+                        '<div class="cat-header">' + 
+                        <% if (catMarker.imgUrl) { %>
+                            '<img src="<%=catMarker.imgUrl%>" class="cat-thumb"/>' + 
+                        <% } %>
+                        '<h1 class="cat-title"><a href="/cat/<%=catMarker.id%>"><%=catMarker.name%></a></h1>' +
+                        '</div>' + 
                         '<div id="bodyContent">' +
                         "<p><%=catMarker.name%> is a cat. They are really cute.</p>" +
-                        "</div>" +
+                        "</div>" + 
                         "</div>";
 
-                    const infowindow_<%=catMarker.name%> = new google.maps.InfoWindow({
-                        content: contentString_<%=catMarker.name%>,
+                    const infowindow_<%=catMarker.id%> = new google.maps.InfoWindow({
+                        content: contentString_<%=catMarker.id%>,
                     });
-                    // The marker, positioned at Uluru
-                    const marker_<%=catMarker.name%>  = new google.maps.Marker({
+
+                    const marker_<%=catMarker.id%>  = new google.maps.Marker({
                         position: { lat: <%= catMarker.lat%>, lng: <%= catMarker.lng %> },
                         map: map,
-                        // icon: "https://art.pixilart.com/42e019c236fe77a.png",
+                        icon: "https://media.discordapp.net/attachments/963907404007870566/965023021465231410/MapPin.png",
                     });
-                    marker_<%=catMarker.name%>.addListener("click", () => {
-                        infowindow_<%=catMarker.name%>.open({
-                        anchor: marker_<%=catMarker.name%>,
+
+                    // adding a listener to pop up the info box upon clicking
+                    marker_<%=catMarker.id%>.addListener("click", () => {
+                        infowindow_<%=catMarker.id%>.open({
+                        anchor: marker_<%=catMarker.id%>,
                         map,
                         shouldFocus: false,
                         });
@@ -77,7 +65,8 @@
 
     </head>
     <body>
-        <h1>Locat Map! Find a cat or something idk im not a cat person</h1>
+        <%- include('partials/header.ejs') %>
+
         <!--The div element for the map -->
         <div id="map"></div>
     </body>
