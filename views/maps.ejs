@@ -36,21 +36,24 @@
                 <% for (let catMarker of catMarkers) { %>
                     const contentString_<%=catMarker._id%> = '<div class="cat-content">' +
                         '<div class="cat-header">' + 
-                        '<div class="pawHolder">' + 
+                        // '<div class="pawHolder">' + 
                         '<img src="/catimage/<%=catMarker._id%>" class="cat-paw"/>' + 
-                        '</div>' + 
+                        // '</div>' + 
                         '<div>' + 
                         '<h2 class="cat-title"><a href="/cat/<%=catMarker._id%>"><%=catMarker.name%></a></h2>' +
                         '<div class="cat-icons">' +
-                        '<img src="/images/<%= catMarker.canpet ? "Pet.png" : "NoPet.png"%>" alt="<%= catMarker.canpet ? "You can pet this cat!" : "Do not pet this cat!"%>"/>' +
-                        '<img src="/images/<%= catMarker.canfeed ? "Feed.png" : "NoFeed.png"%>" alt="<%= catMarker.canfeed ? "You can feed this cat!" : "Do not feed this cat!"%>"/>' +
-                        '<img src="/images/<%= catMarker.healthy ? "Healthy.png" : "NoHealthy.png"%>" alt="<%=catMarker.healthy ? "This cat is healthy." : "This cat is not healthy :("%>"/>' +
+                        <% const petText = catMarker.canpet ? "You can pet this cat!" : "Do not pet this cat!"%>
+                        <% const feedText = catMarker.canfeed ? "You can feed this cat!" : "Do not feed this cat!"%>
+                        <% const healthyText = catMarker.healthy ? "This cat is healthy." : "This cat is not healthy :("%>
+                        '<img src="/images/<%= catMarker.canpet ? "Pet.png" : "NoPet.png"%>" alt="<%= petText%>" title="<%= petText%>"/>' +
+                        '<img src="/images/<%= catMarker.canfeed ? "Feed.png" : "NoFeed.png"%>" alt="<%= feedText%>" title="<%= feedText%>"/>' +
+                        '<img src="/images/<%= catMarker.healthy ? "Healthy.png" : "NoHealthy.png"%>" alt="<%= healthyText%>" title="<%= healthyText%>"/>' +
                         '<img src=""/>' +
                         '</div>' +
                         '</div>' +
                         '</div>' + 
                         '<div class="bodyContent">' +
-                        "<p><%=catMarker.name%> is a cat. They are really cute.</p>" +
+                        "<p><%=catMarker.remarks%></p>" +
                         "</div>" + 
                         "</div>";
 
