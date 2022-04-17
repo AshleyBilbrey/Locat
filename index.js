@@ -82,7 +82,7 @@ app.post("/cat/new", (req, res) => {
 })
 
 app.get("/cat/new",  (req, res) => {
-    res.render("newcat.ejs")
+    res.render("newcat.ejs", {styles: ['form']});
 });
 
 app.get("/catimage/:id", (req, res) => {

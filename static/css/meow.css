@@ -11,11 +11,14 @@ header {
 content {
     display: block;
     width: 40%;
+
     margin: auto;
+    margin-top: -50px;
 }
 
 h1 {
-    font-size: 64px;
+    font-size: 48px;
+    font-style: bold;
     text-align: center;
 }
 
@@ -38,6 +41,23 @@ h1 {
 
 #subtitle {
     text-align: center;
+}
+
+#notice {
+    position: absolute;
+    background-color: white;
+    z-index: 69;
+
+    border-radius: 0.5em;
+    border-width: 3px;
+    border-color: black;
+    border-style: solid;
+
+    left: 50%;
+    transform: translate(-50%, 0);
+    
+    margin-top: 175px;
+    padding: 1em;
 }
 
 #navHolderHolder {

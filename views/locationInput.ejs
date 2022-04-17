@@ -46,6 +46,7 @@
                     styles: <%- include('partials/mapStyles.ejs') %>,
                     mapTypeControl: false,
                     streetViewControl: false,
+                    clickableIcons: false,
                 });
 
                 google.maps.event.addListener(map, 'click', function() {
@@ -95,7 +96,9 @@
     <body>
         <%- include('partials/header') %>
 
-        <h2>Please input this cat's location!</h2>
+        <div id="notice">
+            <h2>Please input this cat's location!</h2>
+        </div>
 
         <div id="map"></div>
     </body>
