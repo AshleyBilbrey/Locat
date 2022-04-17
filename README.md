@@ -18,7 +18,7 @@ https://locat.tech/
 
 <br>
 <img src='https://user-images.githubusercontent.com/44065883/163725897-731ec11c-90f2-4e6f-a4e6-c114850061d4.png'>
-<img src=https://user-images.githubusercontent.com/44065883/163725923-4da4c46d-a5f7-41b6-9478-69b6f49c528f.png'>
+<img src='https://user-images.githubusercontent.com/44065883/163725923-4da4c46d-a5f7-41b6-9478-69b6f49c528f.png'>
 
 <h2>Automagic of Locat</h2>     
 ⭐️ Want to pet a cat? Check out the cat map!🗺<br>  
