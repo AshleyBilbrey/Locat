@@ -49,4 +49,8 @@
 👩‍🎨 <a href="https://www.linkedin.com/in/pratibha-agarwal/" target="_blank">Pratibha Agarwal</a><br> 
 
 
-<h3>Cats are Paw-some!🐾</h3> 
+<div align="center">
+  <h3>Cats are Paw-some!🐾</h3>   
+  Made with ❤️ in Davis 🐮 
+</div>
+
