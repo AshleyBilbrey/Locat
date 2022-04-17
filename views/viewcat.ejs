@@ -9,8 +9,18 @@
 
         <content>
             <h1><%= name %></h1>
-            <p>Such a cutie!</p>
-            <img src="<%= '/catimage/' + _id  %>">
+            <div id="buttonnav"><a class="navbutton" href="/checkin/<%= _id %>">Check In</a><a class="navbutton" href="/update/<%= _id %>">Update Info</a><a class="navbutton" href="/contact/<%= _id %>">Contact Caretaker</a></div>
+            <img class="pageImage" src="<%= '/catimage/' + _id  %>">
+            <ul>
+                <li class="catli"><img class="liimg" src="<%= canpet ? '/images/Pet.png' : '/images/NoPet.png' %>"><div><%= canpet ? 'It is okay to pet this cat!' : 'Do not pet this cat!' %></div></li>
+                <li class="catli"><img class="liimg" src="<%= canfeed ? '/images/Feed.png' : '/images/NoFeed.png' %>"><div><%= canfeed ? 'It is okay to feed this cat!' : 'Do not feed this cat!' %></div></li>
+                <li class="catli"><img class="liimg" src="<%= healthy ? '/images/Healthy.png' : '/images/NoHealthy.png' %>"><div><%= canpet ? 'This cat is healthy.' : 'This cat is not healthy.' %></div></li>
+                <% if(fixed) { %>
+                    <li class="catli"><img class="liimg" src="/images/Neutered.png"><div>This cat is fixed.<br><a href="/info">Learn why this is important.</a></div></li>
+                <% } %>
+                <li class="catli"><img class="liimg" src="/images/Remarks.png"><div>Remarks: <%= remarks %></div></li>
+                <li class="catli"><img class="liimg" src="/images/CareTaker.png"><div>Caretaker: <%= caretaker %><br><a href="/contact/<%= _id %>">Contact this caretaker.</a></div></li>
+            </ul>
         </content>
     </body>
 </html>

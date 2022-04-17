@@ -1,6 +1,6 @@
 import { MongoClient } from "mongodb"
 
-const newCat = async (catributes, callback) => {
+const newCheckIn = async (checkin, parentid , callback) => {
     MongoClient.connect("mongodb://localhost:27017/your-story", { useUnifiedTopology: true }, (err, db) => {
         if(err) {
             console.log(err);
@@ -8,15 +8,9 @@ const newCat = async (catributes, callback) => {
         }
         var dbo = db.db("locat");
             const toInsert = {
-                name: catributes.name,
-                canpet: catributes.canpet ? true : false,
-                canfeed: catributes.canfeed ? true : false,
-                fixed: catributes.fixed ? true : false,
-                healthy: catributes.healthy ? true : false,
-                caretaker: catributes.caretaker,
-                caretakernumber: catributes.caretakernumber,
-                remarks: catributes.remarks,
-                iscat: true
+                parentid: parentid,
+                remarks: checkin.remarks,
+                iscute: true
             }
 
             console.log("Inserting...")
@@ -34,4 +28,4 @@ const newCat = async (catributes, callback) => {
     })
 }
 
-export default newCat
+export default newCheckIn

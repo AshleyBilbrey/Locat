@@ -1,0 +1,27 @@
+<html>
+    <head>
+        <title>Check In <%= name %></title>
+    
+        <%- include('partials/head') %>
+    </head>
+    <body>
+        <%- include('partials/header') %>
+
+        <content>
+            <h1>Check In <%= name %></h1>
+            <form method="post" enctype="multipart/form-data">
+
+                <div id="upload-button-wrapper">
+                    <button id="upload-button">Upload Cat Photo</button>
+                    <input type="file" id="file" name="picture" />
+                </div><br/>
+
+                <label for="remarks">Remarks</label>
+                <input type="text" id="remarks" name="remarks" placeholder="This cat is very cute!">
+
+                <button type="submit">Submit</button>
+
+            </form>
+        </content>
+    </body>
+</html>

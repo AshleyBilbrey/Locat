@@ -11,6 +11,8 @@ import findCat from "./helpers/findCat.js"
 import allCats from "./helpers/allCats.js";
 import constructMap from "./helpers/setUpMap.js";
 import updateLoc from "./helpers/updateLoc.js";
+import updateCheckInLoc from "./helpers/updateCheckInLoc.js";
+import newCheckIn from "./helpers/newCheckin.js";
 
 const app = express();
 const port = process.env.PORT || 8080;
@@ -130,6 +132,54 @@ app.get("/", (req, res) => {
     res.redirect("/map")
 })
 
+app.get("/checkin/:id", (req, res) => {
+    findCat(req.params.id, (catributes) => {
+        console.log(catributes)
+        console.log("Check In Catributes")
+        catributes.styles = ['form'];
+        res.render("checkin.ejs", catributes)
+    })
+})
+
+app.post("/checkin/:id", (req, res) => {
+    const form = new formidable.IncomingForm();
+
+    form.parse(req, (err, fields, files) => {
+        if (err) {
+            console.log(err)
+            return res.status(500).send("Sorry, there was an error processing your request.")
+        }
+
+        newCheckIn(fields, req.params.id, (checkinid) => {
+            console.log(files.picture)
+            if(files.picture != null) {
+                console.log("Image exists")
+                if(files.picture.mimetype == "image/jpeg" || files.picture.mimetype == "image/png") {
+                    console.log("Image of correct type.")
+                    fs.copyFile(files.picture.filepath, "./checkimg/" + checkinid, (err) => {
+                        if(err) {
+                            console.log("Copyingerr")
+                            console.log(err)
+                        }
+                        console.log("File copied!")
+                        exifr.gps('./checkimg/' + checkinid).then((result) => {
+                            if(result && result.latitude != null && result.longitude != null) {
+                                updateCheckInLoc(req.params.id, result.latitude, result.longitude, () => {
+                                    res.redirect("/cat/" + req.params.id)
+                                })
+                            } else {
+                                res.redirect("/map/checkin/" + checkinid + "/" + req.params.id)
+                            }
+                            
+                        })
+                    })
+                }
+            }
+        });  
+        
+    })
+})
+
 // info page
 app.get("/info", function(req, res) {
     res.render("info.ejs");
@@ -152,6 +202,19 @@ app.post("/map/input/:id", function(req, res){
     console.log(req.params.id);
 
     updateLoc(req.params.id, req.body.lat, req.body.lng, (response) => {
+        res.send(response);
+    })
+})
+
+app.get("/map/checkin/:id/:catid", (req, res) => {
+    const mapData = constructMap();
+    mapData.checkInId = req.params.id;
+    mapData.catId = req.params.catid
+    res.render("checkInLocation.ejs", mapData);
+})
+
+app.post("/map/checkin/:id", (req, res) => {
+    updateCheckInLoc(req.params.id, req.body.lat, req.body.lng, (response) => {
         res.send(response);
     })
 })
