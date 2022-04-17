@@ -6,6 +6,8 @@ import path from "path";
 import fs from "fs";
 import formidable from "formidable";
 import newCat from "./helpers/newCat.js"
+import findCat from "./helpers/findCat.js"
+import allCats from "./helpers/allCats.js";
 
 const app = express();
 const port = process.env.PORT || 8080;
@@ -56,7 +58,7 @@ app.post("/cat/new", (req, res) => {
         }
 
         function sendCat(catid) {
-            res.send("Received your new cat! " + catid)
+            res.redirect("/cat/" + catid);
         }
 
         const catid = newCat(fields, sendCat)
@@ -68,6 +70,28 @@ app.post("/cat/new", (req, res) => {
 app.get("/cat/new",  (req, res) => {
     res.render("newcat.ejs")
 });
+
+app.get("/cat/:id", (req, res) => {
+    function sendCat(catributes) {
+        res.render("viewcat.ejs", catributes)
+    }
+
+    findCat(req.params.id, sendCat)
+
+})
+
+app.get("/cat", (req, res) => {
+    function sendCats(cats) {
+        res.send(cats)
+    }
+
+    allCats(sendCats)
+
+})
+
+app.get("/", (req, res) => {
+    res.redirect("/map")
+})
 
 app.listen(port);
 console.log('Server started at http://localhost:' + port);

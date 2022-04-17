@@ -14,7 +14,8 @@ const newCat = async (catributes, callback) => {
                 fixed: catributes.fixed ? true : false,
                 healthy: catributes.healthy ? true : false,
                 caretaker: catributes.caretaker,
-                remarks: catributes.remarks
+                remarks: catributes.remarks,
+                iscat: true
             }
 
             console.log("Inserting...")
