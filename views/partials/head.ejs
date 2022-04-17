@@ -1,0 +1,19 @@
+<!-- page specific scripts -->
+<% if (typeof libs !== 'undefined') { %>
+    <% for (let lib of libs) { %>
+        <script src='/js/<%= lib %>.js' type='text/javascript' defer></script>
+    <% } %>
+<% } %>
+
+<!-- styles for all pages -->
+<link rel="stylesheet" href="/css/reset.css">
+<link rel="stylesheet" href="/css/meow.css">
+
+<!-- styles specific to individual pages -->
+<% if (typeof styles !== 'undefined') { %>
+    <% if (styles.length > 0) { %>
+        <% for (let style of styles) { %>
+            <link rel="stylesheet" href="/css/<%= style %>.css">
+        <% } %>
+    <% } %>
+<% } %>

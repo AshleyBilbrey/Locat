@@ -9,8 +9,6 @@ const port = process.env.PORT || 8080;
 
 // Define static assets
 app.use(express.static('static'));
-// included on all pages
-app.use('/js/libs', express.static(path.join(process.cwd(), 'node_modules/jquery/dist'), { maxAge: 31557600000 }));
 
 // this is where the map itself will be served
 app.get("/map", function(req, res){
@@ -19,9 +17,9 @@ app.get("/map", function(req, res){
     // specify any external js files here
     // mapData.libs = ['maptest'];
     // specify any external css files here
-    mapData.styles = ['maptest'];
+    mapData.styles = ['map'];
 
-    mapData.zoomLevel = 12;
+    mapData.zoomLevel = 15;
 
     const gapiOptions = [
         "key=AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg",
@@ -34,12 +32,11 @@ app.get("/map", function(req, res){
     mapData.gapiOptions = gapiString;
 
     mapData.catMarkers = [
-        { name: "cheeto", lat: 38.5449, lng: -121.7405 },
-        { name: "joe_cat", lat: 38.5469, lng: -121.7465 },
-        { name: "boebinga", lat: 38.5369, lng: -121.7565 },
+        { id: "jjfjdjeeee", name: "Cheeto", imgUrl: "https://cdn.britannica.com/91/181391-050-1DA18304/cat-toes-paw-number-paws-tiger-tabby.jpg", lat: 38.5449, lng: -121.7405 },
+        { id: "jee333nendje", name: "Joe the Cat", imgUrl: "", lat: 38.5469, lng: -121.7465 },
+        { id: "udjj3j3jjj", name: "boebinga", imgUrl: "", lat: 38.5369, lng: -121.7565 },
     ]
 
-    mapData.exampleVar = 'testing joe mama';
     res.render("maps.ejs", mapData);
 });
 

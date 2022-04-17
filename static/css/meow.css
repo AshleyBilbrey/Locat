@@ -3,3 +3,12 @@
 body {
     font-family: 'Plus Jakarta Sans', sans-serif;
 }
+
+h1 {
+    font-size: 64px;
+    text-align: center;
+}
+
+#subtitle {
+    text-align: center;
+}
