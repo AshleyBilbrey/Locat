@@ -10,6 +10,9 @@ from io import BytesIO
 import model.inference as inference
 
 import pickle
+from flask import Flask, request, jsonify
+import functions_framework
+
 
 # Setting the credentials
 os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = './test_creds.json'
@@ -128,8 +131,32 @@ def treat_prod_data(image, data):
 def treat_new_data(config_path, data):
     pass
 
+@functions_framework.http
+def predict_image(request):
+    # pull data from the request
+    request_json = request.get_json(silent=True)
+    image = request_json['image']
+    data = request_json['data']
+    # Recreate the exact same model, including its weights and the optimizer
+    new_model = tf.keras.models.load_model('model/trained/current.h5')
 
-def predict_image(image, data):
+    # treat the data and anlayze the image
+    treatedData = treat_prod_data(image, data)
+    print(treatedData)
+    prediction = new_model.predict(treatedData)
+    _, label_encoder = get_encoders()
+    print(prediction)
+    output = label_encoder.inverse_transform([np.argmax(prediction)])
+    print(output)
+    return output[0]
+
+app = Flask(__name__)
+
+@app.route("/identify", methods=["GET"])
+def process_image():
+    image = request.files['image']
+    data = request.files['data']
+
     # Recreate the exact same model, including its weights and the optimizer
     new_model = tf.keras.models.load_model('model/trained/current.h5')
 
@@ -137,13 +164,8 @@ def predict_image(image, data):
     treatedData = treat_prod_data(image, data)
     prediction = new_model.predict(treatedData)
     _, label_encoder = get_encoders()
-
     output = label_encoder.inverse_transform([np.argmax(prediction)])
-    return output[0]
+    return jsonify({'msg': 'success', 'name': output[0]})
 
-
-### example use: make sure that the image is loaded in as such:
-# with io.open("training/cheeto-1.png", 'rb') as image_file:
-#     content = image_file.read()
-# predict_image(content, {"lat": 38.5369722669077,
-#                         "lng": -121.75092535602036})
+if __name__ == "__main__":
+    app.run(debug=True)
