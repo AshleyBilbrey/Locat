@@ -1,41 +1,18 @@
 import tensorflow as tf
-from model.inference import predict
-# import numpy as np
-# import pandas as pd
-# from sklearn.model_selection import train_test_split
-from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Dense
-from tensorflow.keras.callbacks import EarlyStopping, ModelCheckpoint
-# import matplotlib.pylab as plt
-# import seaborn as sns
-
-# using info from
-# https://cloud.google.com/vision/docs/detecting-properties
-# https://cloud.google.com/vision/docs/labels
+import numpy as np
 
 from google.cloud import vision
 import io
 import os
 import math
-import pandas as pd
 from PIL import Image
 from io import BytesIO
 import model.inference as inference
-from sklearn.preprocessing import MinMaxScaler, LabelEncoder
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import accuracy_score
-import numpy as np
+
 import pickle
-import json
 
 # Setting the credentials
 os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = './test_creds.json'
-
-ACCURACY_THRESHOLD = 0.98
-EPOCHS = 200
-
-np.set_printoptions(suppress=True)
-
 
 def crop_image(image, dimensions):
     x_min, x_max, y_min, y_max = 1, 0, 1, 0
@@ -143,8 +120,6 @@ def treat_prod_data(image, data):
 
     # loading the encoders
     feature_scaler, _ = get_encoders()
-    print(feature_scaler)
-    print(treatedData)
     # transforming the data as appropriate and returning it
     treatedData = feature_scaler.transform(treatedData)
     return treatedData
@@ -167,7 +142,8 @@ def predict_image(image, data):
     return output[0]
 
 
-with io.open("training/cheeto-1.png", 'rb') as image_file:
-    content = image_file.read()
-predict_image(content, {"lat": 38.5369722669077,
-                        "lng": -121.75092535602036})
+### example use: make sure that the image is loaded in as such:
+# with io.open("training/cheeto-1.png", 'rb') as image_file:
+#     content = image_file.read()
+# predict_image(content, {"lat": 38.5369722669077,
+#                         "lng": -121.75092535602036})
