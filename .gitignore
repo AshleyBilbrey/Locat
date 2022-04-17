@@ -1,3 +1,6 @@
 .env
 /node_modules
 test_creds.json
+/pawnails
+/checkins
+/tmp

@@ -54,11 +54,27 @@ app.post("/cat/new", (req, res) => {
             return res.status(500).send("Sorry, there was an error processing your request.")
         }
 
+        if(files[0] != null) {
+            if(files.picture.filetype == "img/jpeg") {
+
+            } else if(files.picture.filetype == "img/png") {
+
+            }
+        }
+
+        fs.readFile(files.picture.filepath, (err, data) => {
+            if(err) {
+                console.log(err)
+                res.send(null)
+            }
+            res.send(data)
+        })
+
         function sendCat(catid) {
             res.redirect("/cat/" + catid);
         }
 
-        const catid = newCat(fields, sendCat)
+        newCat(fields, sendCat)
         
         
     })
