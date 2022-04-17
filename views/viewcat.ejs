@@ -32,6 +32,7 @@
                 });
 
                 <% for (let catMarker of checkIns) { %>
+                    <% if(catMarker.lat != null) { %>
                     const contentString_<%=catMarker._id%> = '<div class="cat-content">' +
                         '<img src="/checkimg/<%= catMarker._id %>" class="cat-paw"/>' + 
                         "</div>";
@@ -47,6 +48,7 @@
                         infoWindow.open(map, marker_<%=catMarker._id%>);
                         infoWindow.setContent(contentString_<%=catMarker._id%>);
                     });
+                    <% } %>
                 <% } %>
             }
             
