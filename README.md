@@ -25,10 +25,14 @@ https://locat.tech/
 ⭐️ Want to add a cat? Add the catributes and you're all set!🎉<br>
 ⭐️ Each cat a few catributes like if it is healthy or ailing, can be pet or not, can be fed or not, its caretaker and some additonal remarks🫶🏻<br>   
 ⭐️ Click loads of pictures of cats and add them along with their location📍<br>   
+
 <h3>Machine Learning</h3>
 Object identification, cropping, image matting, and supervised learning make up to core of our cat identification functionality. Images are run through Google Vision to identify the cat and crop its dimensions in the picture. See an example below. <br> <br>
 Following that, image matting is used to find the image mask of the being in the piction. The inverse of that mask is then multiplied with the image to exract the body of the person in the image. <br> <br>
 Finally, this extracted body is analyzed for color by Google Vision to detect image color qualities. These dominant colors and their data are fed into a dense machine learning model that, along with the locational metadata of the image, are used to train the supervised model. Each image is labeled by a cats name, and those a model is trained that can identify them (reliably!). With the crowd sourcing of fresh data Locat promotes, this model will only become more accurate. 
+
+<h3>Use of EXIF Metadata</h3>
+Images uploaded to our site sometimes contain location metadata, including the latitude and longitude an image was taken. In that case, we can automatically take that data and skip the step prompting the user to pick where they saw a cat on the map.
 
 <h2>Paw-sible Users</h2>
 👤 Cheeto lovers <br>
