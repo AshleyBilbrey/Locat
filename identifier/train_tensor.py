@@ -1,18 +1,7 @@
-from distutils.command.config import config
 import tensorflow as tf
-from identifier.model.inference import predict
-# import numpy as np
-# import pandas as pd
-# from sklearn.model_selection import train_test_split
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense
 from tensorflow.keras.callbacks import EarlyStopping, ModelCheckpoint
-# from tensorflow.keras.callbacks import EarlyStopping, ModelCheckpoint
-# from tensorflow import get_logger
-# import multiprocessing as mp
-# import scipy.io
-# import matplotlib.pylab as plt
-# import seaborn as sns
 
 # using info from
 # https://cloud.google.com/vision/docs/detecting-properties
