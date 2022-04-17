@@ -8,6 +8,12 @@ header {
     margin-bottom: 25px;
 }
 
+content {
+    display: block;
+    width: 40%;
+    margin: auto;
+}
+
 h1 {
     font-size: 64px;
     text-align: center;

@@ -1,0 +1,99 @@
+<html>
+    <head>
+        <title>Input Location</title>
+    
+        <%- include('partials/head') %>
+
+        <!-- the google maps script -->
+        <script
+            src="http://maps.googleapis.com/maps/api/js?<%= gapiOptions %>"
+            defer
+        ></script>
+
+        <script>
+            let marker;
+            let infowindow;
+
+            // A function to create the marker and set up the event window function 
+            function createMarker(latlng, name, html) {
+                let contentString = html;
+                let marker = new google.maps.Marker({
+                    position: latlng,
+                    zIndex: Math.round(latlng.lat()*-100000)<<5,
+                    icon: "<%=markerIconUrl%>",
+                    });
+                google.maps.event.addListener(marker, 'click', function() {
+                    infowindow.setContent(contentString); 
+                    infowindow.open(map,marker);
+                    });
+                google.maps.event.trigger(marker, 'click');    
+                return marker;
+            }
+
+            // Initialize and add the map
+            function initMap() {
+                infowindow = new google.maps.InfoWindow(
+                { 
+                    size: new google.maps.Size(150,50)
+                });
+
+                // The location of Davis
+                const davis = { lat: 38.5449, lng: -121.7405 };
+                // The map, centered at davis
+                const map = new google.maps.Map(document.getElementById("map"), {
+                    zoom: <%= zoomLevel %>,
+                    center: davis,
+                    styles: <%- include('partials/mapStyles.ejs') %>,
+                    mapTypeControl: false,
+                    streetViewControl: false,
+                });
+
+                google.maps.event.addListener(map, 'click', function() {
+                    infowindow.close();
+                });
+
+                google.maps.event.addListener(map, 'click', function(event) {
+                    //call function to create marker
+                    if (marker) {
+                        marker.setMap(null);
+                        marker = null;
+                    }
+
+                    let latlngObj = event.latLng.toJSON();
+
+                    const markerContent = '<h2>Cat\'s Location</h2>' +
+                        event.latLng +
+                        '<br/>' +
+                        '<button onclick="confirmCat(' + latlngObj.lat + ', ' + latlngObj.lng + ')">Confirm</button>';
+
+                    marker = createMarker(event.latLng, "name", markerContent);
+                    marker.setMap(map);
+                });
+            }
+
+            function confirmCat(lat, lng) {
+                console.log("lat: " + lat + " long " + lng);
+                var xhr = new XMLHttpRequest();
+                xhr.open("POST", '/map/input/<%= catId %>', true);
+                xhr.setRequestHeader('Content-Type', 'application/json');
+                xhr.send(JSON.stringify({
+                    lat: lat,
+                    lng: lng,
+                }));
+                xhr.onload = function() {
+                    var data = JSON.parse(this.responseText);
+                    console.log(data);
+                };
+            }
+            
+            window.initMap = initMap;
+        </script>
+    </head>
+    <body>
+        <%- include('partials/header') %>
+
+        <h2>Please input this cat's location!</h2>
+
+        <div id="map"></div>
+    </body>
+</html>

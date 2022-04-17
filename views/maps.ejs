@@ -26,13 +26,15 @@
                     streetViewControl: false,
                 });
 
+                const infoWindow = new google.maps.InfoWindow({});
+
                 <% for (let catMarker of catMarkers) { %>
                     const contentString_<%=catMarker.id%> = '<div class="cat-content">' +
                         '<div class="cat-header">' + 
                         <% if (catMarker.imgUrl) { %>
                             '<img src="<%=catMarker.imgUrl%>" class="cat-thumb"/>' + 
                         <% } %>
-                        '<h1 class="cat-title"><a href="/cat/<%=catMarker.id%>"><%=catMarker.name%></a></h1>' +
+                        '<h2 class="cat-title"><a href="/cat/<%=catMarker.id%>"><%=catMarker.name%></a></h2>' +
                         '</div>' + 
                         '<div class="bodyContent">' +
                         '<div class="cat-icons">' +
@@ -45,23 +47,16 @@
                         "</div>" + 
                         "</div>";
 
-                    const infowindow_<%=catMarker.id%> = new google.maps.InfoWindow({
-                        content: contentString_<%=catMarker.id%>,
-                    });
-
                     const marker_<%=catMarker.id%>  = new google.maps.Marker({
                         position: { lat: <%= catMarker.lat%>, lng: <%= catMarker.lng %> },
                         map: map,
-                        icon: "https://cdn.discordapp.com/attachments/963907404007870566/965097763912183828/HackDavis22MapPin-13.png",
+                        icon: "<%=markerIconUrl%>",
                     });
 
                     // adding a listener to pop up the info box upon clicking
                     marker_<%=catMarker.id%>.addListener("click", () => {
-                        infowindow_<%=catMarker.id%>.open({
-                        anchor: marker_<%=catMarker.id%>,
-                        map,
-                        shouldFocus: false,
-                        });
+                        infoWindow.open(map, marker_<%=catMarker.id%>);
+                        infoWindow.setContent(contentString_<%=catMarker.id%>);
                     });
                 <% } %>
             }
