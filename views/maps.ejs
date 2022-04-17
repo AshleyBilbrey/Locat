@@ -22,14 +22,15 @@
                     zoom: <%= zoomLevel %>,
                     center: davis,
                     styles: <%- include('partials/mapStyles.ejs') %>,
+                    mapTypeControl: false,
+                    streetViewControl: false,
                 });
 
-                <% console.log(catMarkers) %>
                 <% for (let catMarker of catMarkers) { %>
                     const contentString_<%=catMarker.id%> = '<div class="cat-content">' +
-                        '<div class="ca        <!-- <link rel="stylesheet" type="text/css" href="./style.css" /> -->t-header">' + 
+                        '<div class="cat-header">' + 
                         <% if (catMarker.imgUrl) { %>
-                        '<img src="<%=catMarker.imgUrl%>" class="cat-thumb"/>' + 
+                            '<img src="<%=catMarker.imgUrl%>" class="cat-thumb"/>' + 
                         <% } %>
                         '<h1 class="cat-title"><a href="/cat/<%=catMarker.id%>"><%=catMarker.name%></a></h1>' +
                         '</div>' + 

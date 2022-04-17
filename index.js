@@ -32,12 +32,17 @@ app.get("/map", function(req, res){
     mapData.gapiOptions = gapiString;
 
     mapData.catMarkers = [
-        { id: "jjfjdjeeee", name: "Cheeto", imgUrl: "https://cdn.britannica.com/91/181391-050-1DA18304/cat-toes-paw-number-paws-tiger-tabby.jpg", lat: 38.5449, lng: -121.7405 },
+        { id: "jjfjdjeeee", name: "Cheeto", imgUrl: "https://localwiki.org/media/cache/8a/5c/8a5cee3ca2abc90ce86363a595e8222a.png", lat: 38.5449, lng: -121.7405 },
         { id: "jee333nendje", name: "Joe the Cat", imgUrl: "", lat: 38.5469, lng: -121.7465 },
         { id: "udjj3j3jjj", name: "boebinga", imgUrl: "", lat: 38.5369, lng: -121.7565 },
     ]
 
     res.render("maps.ejs", mapData);
+});
+
+// info page
+app.get("/info", function(req, res) {
+    res.render("info.ejs");
 });
 
 app.listen(port);
