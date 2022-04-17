@@ -12,7 +12,7 @@ import allCats from "./helpers/allCats.js";
 import constructMap from "./helpers/setUpMap.js";
 import updateLoc from "./helpers/updateLoc.js";
 import updateCheckInLoc from "./helpers/updateCheckInLoc.js";
-import newCheckIn from "./helpers/newCheckin.js";
+import newCheckIn from "./helpers/newCheckIn.js";
 
 const app = express();
 const port = process.env.PORT || 8080;
@@ -24,9 +24,6 @@ app.use(express.static('static'));
 app.get("/map", function(req, res){
     // all data that needs to go to the map page will be stored in this mapdata object
     const mapData = constructMap();
-
-    const cheetoImg = "https://www.sacbee.com/latest-news/xz27im/picture231405683/alternates/FREE_1140/CHEETO.jpg";
-    const testImg = "https://magazine.ucdavis.edu/wp-content/uploads/2019/09/Cheeto-web-header.jpg"
 
     mapData.catMarkers = [
         { _id: "jjfjdjeeee", name: "Cheeto", lat: 38.5449, lng: -121.7405, remarks: "chonk", canpet: true, canfeed: false, healthy: false },
@@ -121,9 +118,17 @@ app.get("/cat/:id", (req, res) => {
 })
 
 app.get("/cat", (req, res) => {
+    const testCats = [
+        { _id: "jjfjdjeeee", name: "Cheeto", lat: 38.5449, lng: -121.7405, remarks: "chonk", canpet: true, canfeed: false, healthy: false },
+        { _id: "jee333nendje", name: "Joe the Cat", lat: 38.5469, lng: -121.7465, remarks: "boknk", canfeed: true },
+        { _id: "udjj3j3jjj", name: "boebinga", lat: 38.5369, lng: -121.7565, remarks: "badonkadong", healthy: true },
+    ]
+
     allCats(cats => {
-        res.render("list.ejs", {cats: cats});
+        res.render("list.ejs", {cats: cats, styles: ['list']});
     });
+
+    // res.render("list.ejs", {cats: testCats, styles: ['list']});
 })
 
 app.get("/", (req, res) => {
